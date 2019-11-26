@@ -14,6 +14,7 @@
 		A11C3E0F238D49360099B67F /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E0E238D49360099B67F /* MovieListView.swift */; };
 		A11C3E12238D62AD0099B67F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E11238D62AD0099B67F /* NetworkManager.swift */; };
 		A11C3E14238D63940099B67F /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E13238D63940099B67F /* MovieModel.swift */; };
+		A11C3E1D238D6DD70099B67F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E1C238D6DD70099B67F /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		A11C3E0E238D49360099B67F /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
 		A11C3E11238D62AD0099B67F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A11C3E13238D63940099B67F /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		A11C3E1C238D6DD70099B67F /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		A11C3DF3238D36750099B67F /* CinemaApp */ = {
 			isa = PBXGroup;
 			children = (
+				A11C3E1B238D6DB80099B67F /* Protocols */,
 				A11C3E0C238D48960099B67F /* Scenes */,
 				A11C3E10238D62970099B67F /* Services */,
 				A11C3E15238D64DC0099B67F /* Resources */,
@@ -108,6 +111,14 @@
 				A11C3E09238D43AA0099B67F /* LaunchScreen.storyboard */,
 			);
 			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		A11C3E1B238D6DB80099B67F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A11C3E1C238D6DD70099B67F /* Protocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,6 +194,7 @@
 				A11C3E12238D62AD0099B67F /* NetworkManager.swift in Sources */,
 				A11C3DF9238D36750099B67F /* MovieListViewController.swift in Sources */,
 				A11C3E14238D63940099B67F /* MovieModel.swift in Sources */,
+				A11C3E1D238D6DD70099B67F /* Protocols.swift in Sources */,
 				A11C3DF5238D36750099B67F /* AppDelegate.swift in Sources */,
 				A11C3E0F238D49360099B67F /* MovieListView.swift in Sources */,
 			);
