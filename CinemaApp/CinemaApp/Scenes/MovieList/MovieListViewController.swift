@@ -9,14 +9,15 @@
 import UIKit
 
 class MovieListViewController: UIViewController {
-
+  
+  let networkManager = NetworkManager()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    view.backgroundColor = .red
+    networkManager.getUpcomingMovies { [weak self] (movies) in
+      guard self != nil else { return }
+    }
   }
-
-
 }
 

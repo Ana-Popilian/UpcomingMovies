@@ -13,6 +13,7 @@
 		A11C3E0B238D43AA0099B67F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A11C3E09238D43AA0099B67F /* LaunchScreen.storyboard */; };
 		A11C3E0F238D49360099B67F /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E0E238D49360099B67F /* MovieListView.swift */; };
 		A11C3E12238D62AD0099B67F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E11238D62AD0099B67F /* NetworkManager.swift */; };
+		A11C3E14238D63940099B67F /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E13238D63940099B67F /* MovieModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A11C3E0A238D43AA0099B67F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A11C3E0E238D49360099B67F /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
 		A11C3E11238D62AD0099B67F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		A11C3E13238D63940099B67F /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				A11C3E0E238D49360099B67F /* MovieListView.swift */,
 				A11C3DF8238D36750099B67F /* MovieListViewController.swift */,
+				A11C3E13238D63940099B67F /* MovieModel.swift */,
 			);
 			path = MovieList;
 			sourceTree = "<group>";
@@ -163,6 +166,7 @@
 			files = (
 				A11C3E12238D62AD0099B67F /* NetworkManager.swift in Sources */,
 				A11C3DF9238D36750099B67F /* MovieListViewController.swift in Sources */,
+				A11C3E14238D63940099B67F /* MovieModel.swift in Sources */,
 				A11C3DF5238D36750099B67F /* AppDelegate.swift in Sources */,
 				A11C3E0F238D49360099B67F /* MovieListView.swift in Sources */,
 			);
