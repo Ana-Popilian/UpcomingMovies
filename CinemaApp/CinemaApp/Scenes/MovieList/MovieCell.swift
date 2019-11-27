@@ -7,8 +7,8 @@
 //
 
 import UIKit
-
-final class MovieCell: UICollectionViewCell {
+  
+final class MovieCell: UICollectionViewCell, Identifiable {
   
   private enum ViewTrait {
     static let defaultVerticalSpacing: CGFloat = 75
@@ -54,7 +54,7 @@ private extension MovieCell {
   func setupConstraints() {
     NSLayoutConstraint.activate([
       
-      movieImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 5),
+      movieImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: ViewTrait.defaultSpacing),
       movieImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: ViewTrait.defaultSpacing),
       movieImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -ViewTrait.defaultSpacing),
       movieImageView.heightAnchor.constraint(equalToConstant: ViewTrait.defaultVerticalSpacing),
@@ -66,6 +66,3 @@ private extension MovieCell {
     ])
   }
 }
-
-
-

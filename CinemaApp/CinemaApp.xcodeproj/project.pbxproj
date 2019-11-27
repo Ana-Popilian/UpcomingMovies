@@ -77,6 +77,7 @@
 		A11C3E0C238D48960099B67F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				A1479E20238F0D1800F8A7C5 /* MovieDetails */,
 				A11C3E0D238D48AC0099B67F /* MovieList */,
 			);
 			path = Scenes;
@@ -133,6 +134,13 @@
 				A11C3E21238D72300099B67F /* UIView+Additions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A1479E20238F0D1800F8A7C5 /* MovieDetails */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MovieDetails;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
