@@ -11,7 +11,8 @@ import UIKit
 final class MovieListViewController: UIViewController {
   
   let networkManager = NetworkManager()
-  private var movieData = [Movies]()
+  private var movieData = [MovieModel]()
+  
   
   private var collectionView: UICollectionView!
   
@@ -19,7 +20,7 @@ final class MovieListViewController: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = .red
-
+    
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.dataSource = self
     collectionView.delegate = self
@@ -27,13 +28,15 @@ final class MovieListViewController: UIViewController {
     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
     
     networkManager.getUpcomingMovies { [weak self] (movies) in
-      guard self != nil else { return }
+      
+      guard let self = self else { return }
+      
+      self.movieData.append(contentsOf: movies)
       
       DispatchQueue.main.async {
-        self?.collectionView.reloadData()
+        self.collectionView.reloadData()
       }
     }
-    
     
     view.addSubviewWithoutConstraints(collectionView)
     NSLayoutConstraint.activate([
@@ -45,22 +48,25 @@ final class MovieListViewController: UIViewController {
   }
 }
 
-//extension MovieListViewController {
-//
-//  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    //     let movie = movieData[indexPath.row]
-//  }
-//}
+extension MovieListViewController {
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    let movie = movieData[indexPath.row]
+  }
+}
 
 extension MovieListViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    12
+    movieData.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as! MovieCell
     cell.backgroundColor = .yellow
+    
+    let movie = movieData[indexPath.row]
+    cell.bindCell(movie: movie)
     return cell
   }
 }
@@ -70,7 +76,7 @@ extension MovieListViewController: UICollectionViewDataSource {
 extension MovieListViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let width = (view.frame.width / 3 - 16)
+    let width = (view.frame.width / 3 - 14)
     return CGSize(width: width, height: 100)
   }
   

@@ -37,9 +37,13 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 14)
     label.textAlignment = .center
-    label.textColor = .white
+    label.textColor = .black
     return label
   }()
+  
+  func bindCell(movie: MovieModel) {
+    movieNameLabel.text = movie.title
+  }
 }
 
 

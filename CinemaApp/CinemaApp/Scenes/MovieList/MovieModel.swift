@@ -12,7 +12,7 @@ struct MovieModel: Codable {
   let id: Int
   let title: String
   let popularity: Double
-  let image: String
+  let image: String?
   let voteAverage: Double
   let overview: String
   let releaseDate: String
