@@ -28,8 +28,9 @@ final class MovieCell: UICollectionViewCell, Identifiable {
   
   let movieImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleAspectFill
     imageView.backgroundColor = .green
+    imageView.clipsToBounds = true
     return imageView
   }()
   
@@ -43,6 +44,11 @@ final class MovieCell: UICollectionViewCell, Identifiable {
   
   func bindCell(movie: MovieModel) {
     movieNameLabel.text = movie.title
+    
+    guard let imageUrl = movie.image else {
+      return
+    }
+    movieImageView.downloadImage(fromUrl: imageUrl)
   }
 }
 
@@ -58,15 +64,15 @@ private extension MovieCell {
   func setupConstraints() {
     NSLayoutConstraint.activate([
       
-      movieImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: ViewTrait.defaultSpacing),
-      movieImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: ViewTrait.defaultSpacing),
-      movieImageView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -ViewTrait.defaultSpacing),
+      movieImageView.topAnchor.constraint(equalTo: topAnchor, constant: ViewTrait.defaultSpacing),
+      movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewTrait.defaultSpacing),
+      movieImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultSpacing),
       movieImageView.heightAnchor.constraint(equalToConstant: ViewTrait.defaultVerticalSpacing),
       
       movieNameLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: ViewTrait.defaultSpacing),
-      movieNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: ViewTrait.defaultSpacing),
-      movieNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -ViewTrait.defaultSpacing),
-      movieNameLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -ViewTrait.defaultSpacing)
+      movieNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewTrait.defaultSpacing),
+      movieNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultSpacing),
+      movieNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ViewTrait.defaultSpacing)
     ])
   }
 }

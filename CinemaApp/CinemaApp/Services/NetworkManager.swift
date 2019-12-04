@@ -6,9 +6,11 @@
 //  Copyright © 2019 Ana Popilian. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class NetworkManager {
+final class NetworkManager {
+  
+  let movieCell = MovieCell()
   
   func getUpcomingMovies(completionHandler: @escaping (_ movies: [MovieModel]) -> Void) {
     
@@ -40,21 +42,16 @@ class NetworkManager {
     
     request.resume()
   }
-  //let urlString = "https://image.tmdb.org/t/p/w780/qdfARIhgpgZOBh3vfNhWS4hmSo3.jpg"
-  private let baseURl = "https://image.tmdb.org/t/p/w780/"
   
-  func getImage( at urlString: String, completion: @escaping (Bool, UIImage?) -> ()) {
-    let url = URL(string: urlString)
-    guard let unwrappedUrl = url else { return }
-    
-    let request = URLRequest(url: unwrappedUrl)
-    
-    let session = URLSession.shared
-    
-    let task = session.dataTask(with: request) { data, response, error in
-      guard let data = data, let image = UIImage(data: data) else { completion (false, nil); return }
-      completion(true, image)
-    }
+  func fetchImage(imageUrl: String, completion: @escaping (Data?) -> ()) {
+    let baseURl = "https://image.tmdb.org/t/p/w154/"
+    let url = URL(string: baseURl + imageUrl)!
+
+    let request = URLRequest(url: url)
+
+    let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+      completion(data)
+    })
     task.resume()
   }
 }

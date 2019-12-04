@@ -12,7 +12,7 @@ final class MovieListViewController: UIViewController {
   
   let networkManager = NetworkManager()
   private var movieData = [MovieModel]()
-  
+  let baseUrl = "https://image.tmdb.org/t/p/w780/"
   
   private var collectionView: UICollectionView!
   
@@ -28,11 +28,11 @@ final class MovieListViewController: UIViewController {
     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
     
     networkManager.getUpcomingMovies { [weak self] (movies) in
-      
+
       guard let self = self else { return }
-      
+
       self.movieData.append(contentsOf: movies)
-      
+
       DispatchQueue.main.async {
         self.collectionView.reloadData()
       }
@@ -46,6 +46,11 @@ final class MovieListViewController: UIViewController {
       collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
     ])
   }
+}
+
+//MARK: - Private Zone
+private extension MovieListViewController {
+  
 }
 
 extension MovieListViewController {

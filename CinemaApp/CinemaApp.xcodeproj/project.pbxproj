@@ -17,6 +17,7 @@
 		A11C3E1D238D6DD70099B67F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E1C238D6DD70099B67F /* Protocols.swift */; };
 		A11C3E1F238D6EEF0099B67F /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E1E238D6EEF0099B67F /* MovieCell.swift */; };
 		A11C3E22238D72300099B67F /* UIView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3E21238D72300099B67F /* UIView+Additions.swift */; };
+		A1D4E4672397FE57002947A2 /* UIImageView+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D4E4662397FE57002947A2 /* UIImageView+Download.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		A11C3E1C238D6DD70099B67F /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		A11C3E1E238D6EEF0099B67F /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		A11C3E21238D72300099B67F /* UIView+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Additions.swift"; sourceTree = "<group>"; };
+		A1D4E4662397FE57002947A2 /* UIImageView+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Download.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				A11C3E21238D72300099B67F /* UIView+Additions.swift */,
+				A1D4E4662397FE57002947A2 /* UIImageView+Download.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			files = (
 				A11C3E1F238D6EEF0099B67F /* MovieCell.swift in Sources */,
 				A11C3E12238D62AD0099B67F /* NetworkManager.swift in Sources */,
+				A1D4E4672397FE57002947A2 /* UIImageView+Download.swift in Sources */,
 				A11C3DF9238D36750099B67F /* MovieListViewController.swift in Sources */,
 				A11C3E14238D63940099B67F /* MovieModel.swift in Sources */,
 				A11C3E22238D72300099B67F /* UIView+Additions.swift in Sources */,
