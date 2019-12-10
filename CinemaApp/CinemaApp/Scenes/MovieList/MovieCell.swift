@@ -7,17 +7,21 @@
 //
 
 import UIKit
-  
+
 final class MovieCell: UICollectionViewCell, Identifiable {
+  
+  private var activityIndicator: UIActivityIndicatorView!
   
   private enum ViewTrait {
     static let defaultVerticalSpacing: CGFloat = 75
     static let defaultSpacing: CGFloat = 5
   }
   
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
+    setupActivity()
     addSubviews()
     setupConstraints()
   }
@@ -26,7 +30,12 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     fatalError("init(coder:) has not been implemented")
   }
   
-  let movieImageView: UIImageView = {
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    movieImageView.image = UIImage(named: "ic_imagePlaceholder")
+  }
+  
+  private let movieImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
     imageView.backgroundColor = .green
@@ -34,21 +43,35 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     return imageView
   }()
   
-  let movieNameLabel: UILabel = {
+  private let movieNameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.boldSystemFont(ofSize: 14)
+    label.font = UIFont.boldSystemFont(ofSize: 12)
     label.textAlignment = .center
-    label.textColor = .black
+    label.textColor = .white
     return label
   }()
   
   func bindCell(movie: MovieModel) {
+    
+    activityIndicator.startAnimating()
     movieNameLabel.text = movie.title
     
     guard let imageUrl = movie.image else {
       return
     }
-    movieImageView.downloadImage(fromUrl: imageUrl)
+    movieImageView.downloadImage(fromUrl: imageUrl, downloadFinishedHandler: {
+      self.activityIndicator.stopAnimating()
+    })
+  }
+}
+
+
+private extension MovieCell {
+  
+  func setupActivity() {
+    activityIndicator = UIActivityIndicatorView(style: .large)
+    activityIndicator.color = .white
+    activityIndicator.hidesWhenStopped = true
   }
 }
 
@@ -59,6 +82,7 @@ private extension MovieCell {
   func addSubviews() {
     addSubviewWithoutConstraints(movieImageView)
     addSubviewWithoutConstraints(movieNameLabel)
+    addSubviewWithoutConstraints(activityIndicator)
   }
   
   func setupConstraints() {
@@ -72,7 +96,13 @@ private extension MovieCell {
       movieNameLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: ViewTrait.defaultSpacing),
       movieNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewTrait.defaultSpacing),
       movieNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultSpacing),
-      movieNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ViewTrait.defaultSpacing)
+      movieNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ViewTrait.defaultSpacing),
+      
+      
+      activityIndicator.widthAnchor.constraint(equalToConstant: 30),
+      activityIndicator.heightAnchor.constraint(equalToConstant: 30),
+      activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
+      activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
     ])
   }
 }

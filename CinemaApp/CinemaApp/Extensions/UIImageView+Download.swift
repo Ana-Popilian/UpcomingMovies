@@ -10,7 +10,8 @@ import UIKit
 
 extension UIImageView {
   
-  func downloadImage(fromUrl url: String) {
+  func downloadImage(fromUrl url: String, downloadFinishedHandler: @escaping (() -> Void)) {
+    
     let networkManager = NetworkManager()
     networkManager.fetchImage(imageUrl: url, completion: { data in
       guard let data = data else {
@@ -20,6 +21,7 @@ extension UIImageView {
       let image = UIImage(data: data)
       DispatchQueue.main.async {
         self.image = image
+        downloadFinishedHandler()
       }
     })
   }

@@ -12,9 +12,13 @@ final class NetworkManager {
   
   let movieCell = MovieCell()
   
-  func getUpcomingMovies(completionHandler: @escaping (_ movies: [MovieModel]) -> Void) {
+  func getUpcomingMovies(page: Int, completionHandler: @escaping (_ movies: [MovieModel]) -> Void) {
     
-    guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=6dac60d5bfa0f64225d7b8e75c53069e") else { return }
+
+    guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=6dac60d5bfa0f64225d7b8e75c53069e&page=\(page)") else {
+      fatalError("url must be valid!!!")
+    }
+    
     let request = URLSession.shared.dataTask(with: url) { (data, response, error) in
       
       do {
