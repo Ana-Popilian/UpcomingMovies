@@ -11,11 +11,9 @@ import UIKit
 
 final class MovieListViewController: UIViewController {
   
-  let networkManager = NetworkManager()
   private var movieData = [MovieModel]()
-  let baseUrl = "https://image.tmdb.org/t/p/w780/"
-  var page = 0
-  var isFetchingData = true
+  private var page = 0
+  private var isFetchingData = false
   
   private var collectionView: UICollectionView!
   
@@ -32,21 +30,22 @@ final class MovieListViewController: UIViewController {
     
     setupView()
     fetchNewData()
-    
   }
   
   private func setupView() {
-    view.backgroundColor = .red
+    view.backgroundColor = ColorHelper.customPurple
     
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.dataSource = self
     collectionView.delegate = self
+    collectionView.backgroundColor = ColorHelper.customPurple
     collectionView.showsVerticalScrollIndicator = true
-  
+    collectionView.indicatorStyle = .white
+    
     collectionView.addSubviewWithoutConstraints(activityIndicator)
     activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
     activityIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor, constant: -50).isActive = true
-    collectionView.indicatorStyle = .white
+    
     
     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
     
@@ -69,11 +68,9 @@ private extension MovieListViewController {
     networkManager.getUpcomingMovies(page: page, completionHandler: { [weak self] (movies) in
       guard let self = self else { return }
       
-
       if movies.isEmpty {
         return
       }
-    
       
       var indexPaths = [IndexPath]()
       let currentIndex = self.movieData.count - 1
@@ -85,7 +82,7 @@ private extension MovieListViewController {
       self.movieData.append(contentsOf: movies)
       
       DispatchQueue.main.async {
-         self.activityIndicator.stopAnimating()
+        self.activityIndicator.stopAnimating()
         self.collectionView.insertItems(at: indexPaths)
       }
       
@@ -94,10 +91,23 @@ private extension MovieListViewController {
   }
 }
 
+
+extension MovieListViewController: UIScrollViewDelegate {
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if(collectionView.contentOffset.y >= (collectionView.contentSize.height - collectionView.frame.size.height - collectionView.contentSize.height * 0.1) && isFetchingData == false) {
+      
+      isFetchingData = true
+      fetchNewData()
+    }
+  }
+}
+
+
 extension MovieListViewController {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    let movie = movieData[indexPath.row]
+    //    let movie = movieData[indexPath.row]
   }
 }
 
@@ -109,7 +119,6 @@ extension MovieListViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCell.identifier, for: indexPath) as! MovieCell
-    cell.backgroundColor = .black
     
     let movie = movieData[indexPath.row]
     cell.bindCell(movie: movie)

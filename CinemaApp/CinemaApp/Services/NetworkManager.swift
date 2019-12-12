@@ -8,14 +8,13 @@
 
 import Foundation
 
-final class NetworkManager {
+final class NetworkManager: NSObject {
   
   let movieCell = MovieCell()
   
   func getUpcomingMovies(page: Int, completionHandler: @escaping (_ movies: [MovieModel]) -> Void) {
     
-
-    guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=6dac60d5bfa0f64225d7b8e75c53069e&page=\(page)") else {
+    guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=6dac60d5bfa0f64225d7b8e75c53069e&language=en-US&page=\(page)") else {
       fatalError("url must be valid!!!")
     }
     
@@ -26,7 +25,6 @@ final class NetworkManager {
         let response = try decoder.decode(Movies.self, from: data!)
         
         completionHandler(response.results)
-        print(response)
         
       } catch let DecodingError.dataCorrupted(context) {
         print(context)
@@ -50,12 +48,18 @@ final class NetworkManager {
   func fetchImage(imageUrl: String, completion: @escaping (Data?) -> ()) {
     let baseURl = "https://image.tmdb.org/t/p/w154/"
     let url = URL(string: baseURl + imageUrl)!
-
+    
     let request = URLRequest(url: url)
-
-    let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+    let sessionConfig = URLSessionConfiguration.default
+    sessionConfig.timeoutIntervalForResource = 5
+    
+    let session = URLSession(configuration: sessionConfig)
+    
+    let task = session.dataTask(with: request, completionHandler: { data, response, error in
       completion(data)
     })
     task.resume()
   }
 }
+
+

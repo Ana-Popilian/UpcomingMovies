@@ -14,7 +14,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
   
   private enum ViewTrait {
     static let defaultVerticalSpacing: CGFloat = 75
-    static let defaultSpacing: CGFloat = 5
+    static let defaultSpacing: CGFloat = 2
   }
   
   
@@ -32,13 +32,13 @@ final class MovieCell: UICollectionViewCell, Identifiable {
   
   override func prepareForReuse() {
     super.prepareForReuse()
-    movieImageView.image = UIImage(named: "ic_imagePlaceholder")
+    movieImageView.image = nil
+    movieImageView.contentMode = .scaleAspectFill
   }
   
   private let movieImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
-    imageView.backgroundColor = .green
     imageView.clipsToBounds = true
     return imageView
   }()
@@ -57,6 +57,9 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     movieNameLabel.text = movie.title
     
     guard let imageUrl = movie.image else {
+      activityIndicator.stopAnimating()
+      movieImageView.image = UIImage(named: "ic_imagePlaceholder")!
+      movieImageView.contentMode = .scaleAspectFit
       return
     }
     movieImageView.downloadImage(fromUrl: imageUrl, downloadFinishedHandler: {
@@ -66,6 +69,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
 }
 
 
+//MARK: Private Zone
 private extension MovieCell {
   
   func setupActivity() {

@@ -15,6 +15,9 @@ extension UIImageView {
     let networkManager = NetworkManager()
     networkManager.fetchImage(imageUrl: url, completion: { data in
       guard let data = data else {
+        DispatchQueue.main.async {
+          downloadFinishedHandler()
+        }
         return
       }
       
