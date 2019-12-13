@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     
     let nextViewController = MovieListViewController()
-    window?.rootViewController = nextViewController
+    window?.rootViewController = UINavigationController(rootViewController: nextViewController)
     window?.makeKeyAndVisible()
     return true
   }

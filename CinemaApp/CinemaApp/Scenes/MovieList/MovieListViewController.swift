@@ -17,6 +17,9 @@ final class MovieListViewController: UIViewController {
   
   private var collectionView: UICollectionView!
   
+  
+  
+  
   let activityIndicator: UIActivityIndicatorView = {
     let ai = UIActivityIndicatorView(style: .large)
     ai.color = .white
@@ -28,12 +31,14 @@ final class MovieListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    navigationItem.title = "Upcoming Movies"
+    navigationController?.navigationBar.barTintColor = ColorHelper.darkPurple
+    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     setupView()
     fetchNewData()
   }
   
   private func setupView() {
-    view.backgroundColor = ColorHelper.customPurple
     
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.dataSource = self
@@ -45,7 +50,6 @@ final class MovieListViewController: UIViewController {
     collectionView.addSubviewWithoutConstraints(activityIndicator)
     activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor).isActive = true
     activityIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor, constant: -50).isActive = true
-    
     
     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
     

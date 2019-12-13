@@ -9,6 +9,7 @@
 import Foundation
 
 struct MovieModel: Codable {
+  
   let id: Int
   let title: String
   let popularity: Double
