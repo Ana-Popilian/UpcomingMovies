@@ -6,4 +6,21 @@
 //  Copyright © 2019 Ana Popilian. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+final class MovieDetailsViewController: UIViewController {
+  
+  private var movieDetailsView: MovieDetailsView!
+  
+  override func loadView() {
+    
+    movieDetailsView = MovieDetailsView()
+    
+    view = movieDetailsView
+    view.backgroundColor = .darkGray
+  }
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+}

@@ -18,8 +18,6 @@ final class MovieListViewController: UIViewController {
   private var collectionView: UICollectionView!
   
   
-  
-  
   let activityIndicator: UIActivityIndicatorView = {
     let ai = UIActivityIndicatorView(style: .large)
     ai.color = .white
