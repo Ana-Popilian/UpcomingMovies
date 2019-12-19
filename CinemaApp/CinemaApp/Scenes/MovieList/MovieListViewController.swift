@@ -15,8 +15,12 @@ final class MovieListViewController: UIViewController {
   private var page = 0
   private var isFetchingData = false
   
+  
   private var collectionView: UICollectionView!
   
+  private enum ViewTrait {
+    static let defaultVerticalSpacing: CGFloat = 10
+  }
   
   let activityIndicator: UIActivityIndicatorView = {
     let ai = UIActivityIndicatorView(style: .large)
@@ -28,12 +32,17 @@ final class MovieListViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    title = "Upcoming Movies"
+    navigationController?.navigationBar.tintColor = ColorHelper.darkPurple
     
-    navigationItem.title = "Upcoming Movies"
     navigationController?.navigationBar.barTintColor = ColorHelper.darkPurple
     navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     setupView()
     fetchNewData()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
   }
   
   private func setupView() {
@@ -53,6 +62,7 @@ final class MovieListViewController: UIViewController {
     
     view.addSubviewWithoutConstraints(collectionView)
     NSLayoutConstraint.activate([
+      
       collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
       collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -106,10 +116,16 @@ extension MovieListViewController: UIScrollViewDelegate {
 }
 
 
-extension MovieListViewController {
+//MARK: - UICollectionViewDelegate
+extension MovieListViewController: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //    let movie = movieData[indexPath.row]
+    let movie = movieData[indexPath.row]
+    
+    let nextViewController = MovieDetailsViewController()
+    nextViewController.currentMovie = movie
+    
+    navigationController?.pushViewController(nextViewController, animated: true)
   }
 }
 

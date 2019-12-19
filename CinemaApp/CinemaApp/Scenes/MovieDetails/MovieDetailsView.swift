@@ -12,10 +12,10 @@ import UIKit
 final class MovieDetailsView : UIView{
   
   private enum ViewTrait {
-    static let defaultVerticalSpacing: CGFloat = 25
-    static let bottomVerticalSpacing: CGFloat = -60
+    static let defaultVerticalSpacing: CGFloat = 20
+    static let bottomVerticalSpacing: CGFloat = -30
     static let defaultHorizontalSpacing: CGFloat = 10
-    
+    static let imageHeight: CGFloat = 300
   }
   
   override init(frame: CGRect) {
@@ -29,11 +29,11 @@ final class MovieDetailsView : UIView{
     fatalError("init(coder:) has not been implemented")
   }
   
+  
   private let movieNameLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 16)
     label.textAlignment = .center
-    label.text = "Frozen"
     label.textColor = .white
     return label
   }()
@@ -42,8 +42,6 @@ final class MovieDetailsView : UIView{
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
     imageView.clipsToBounds = true
-    imageView.image = UIImage(named: "ic_imagePlaceholder")
-    imageView.backgroundColor = .red
     return imageView
   }()
   
@@ -51,7 +49,6 @@ final class MovieDetailsView : UIView{
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 14)
     label.textAlignment = .center
-    label.text = "25.12.2019"
     label.textColor = .white
     return label
   }()
@@ -60,32 +57,32 @@ final class MovieDetailsView : UIView{
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 14)
     label.textAlignment = .center
-    label.text = "Frozen is 98%"
     label.textColor = .white
     return label
   }()
   
-  private let movieOverviewLabel: UILabel = {
-    let label = UILabel()
-    label.font = UIFont.boldSystemFont(ofSize: 14)
-    label.textAlignment = .natural
-    label.numberOfLines = 4
-    label.text = "Frozen is a movie In order to change the color of status bar we have do two changes define the property of view controller-based status bar property in your info.plist file"
-    label.textColor = .white
-    return label
+  private let movieOverviewTextView: UITextView = {
+    let textView = UITextView()
+    textView.font = UIFont.boldSystemFont(ofSize: 14)
+    textView.textAlignment = .natural
+    textView.textColor = .white
+    textView.isEditable = false
+    textView.backgroundColor = ColorHelper.darkPurple
+    return textView
   }()
   
   func bindView(movie: MovieModel) {
     movieNameLabel.text = movie.title
-    movieReleaseDateLabel.text = movie.releaseDate
-    moviePopularityLabel.text = String(movie.popularity)
-    movieOverviewLabel.text = movie.overview
+    movieReleaseDateLabel.text = ("Realease Date: \(movie.releaseDate)")
+    moviePopularityLabel.text = ("Popularity: \(movie.popularity)")
+    movieOverviewTextView.text = movie.overview
     
     guard let imageUrl = movie.image else {
       movieImageView.contentMode = .scaleAspectFit
       return
     }
-    movieImageView.downloadImage(fromUrl: imageUrl, downloadFinishedHandler: {
+
+    movieImageView.downloadImage(fromUrl: imageUrl, width: 300, downloadFinishedHandler: {
       
     })
   }
@@ -100,7 +97,7 @@ private extension MovieDetailsView {
     addSubviewWithoutConstraints(movieImageView)
     addSubviewWithoutConstraints(movieReleaseDateLabel)
     addSubviewWithoutConstraints(moviePopularityLabel)
-    addSubviewWithoutConstraints(movieOverviewLabel)
+    addSubviewWithoutConstraints(movieOverviewTextView)
   }
   
   func setupConstraints() {
@@ -112,8 +109,8 @@ private extension MovieDetailsView {
       
       movieImageView.centerXAnchor.constraint(equalTo: self.safeAreaLayoutGuide.centerXAnchor),
       movieImageView.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
-      movieImageView.widthAnchor.constraint(equalToConstant: 300),
-      movieImageView.heightAnchor.constraint(equalToConstant: 300),
+      movieImageView.widthAnchor.constraint(equalToConstant: ViewTrait.imageHeight),
+      movieImageView.heightAnchor.constraint(equalToConstant: ViewTrait.imageHeight),
       
       movieReleaseDateLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
       movieReleaseDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -123,10 +120,10 @@ private extension MovieDetailsView {
       moviePopularityLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
       moviePopularityLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
       
-      movieOverviewLabel.topAnchor.constraint(equalTo: moviePopularityLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
-      movieOverviewLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
-      movieOverviewLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
-      movieOverviewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: ViewTrait.bottomVerticalSpacing)
+      movieOverviewTextView.topAnchor.constraint(equalTo: moviePopularityLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+      movieOverviewTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
+      movieOverviewTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
+      movieOverviewTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: ViewTrait.bottomVerticalSpacing)
       
     ])
   }

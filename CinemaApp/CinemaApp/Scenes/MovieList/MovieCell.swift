@@ -87,6 +87,7 @@ private extension MovieCell {
     addSubviewWithoutConstraints(movieImageView)
     addSubviewWithoutConstraints(movieNameLabel)
     addSubviewWithoutConstraints(activityIndicator)
+    
   }
   
   func setupConstraints() {

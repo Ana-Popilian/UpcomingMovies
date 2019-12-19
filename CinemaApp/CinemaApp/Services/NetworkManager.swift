@@ -6,7 +6,7 @@
 //  Copyright © 2019 Ana Popilian. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 final class NetworkManager: NSObject {
   
@@ -45,8 +45,9 @@ final class NetworkManager: NSObject {
     request.resume()
   }
   
-  func fetchImage(imageUrl: String, completion: @escaping (Data?) -> ()) {
-    let baseURl = "https://image.tmdb.org/t/p/w154/"
+  func fetchImage(imageUrl: String, width: Int, completion: @escaping (Data?) -> ()) {
+    
+    let baseURl = "https://image.tmdb.org/t/p/w\(width)/"
     let url = URL(string: baseURl + imageUrl)!
     
     let request = URLRequest(url: url)

@@ -10,6 +10,7 @@ import UIKit
 
 final class MovieDetailsViewController: UIViewController {
   
+  var currentMovie: MovieModel!
   private var movieDetailsView: MovieDetailsView!
   
   override func loadView() {
@@ -17,7 +18,8 @@ final class MovieDetailsViewController: UIViewController {
     movieDetailsView = MovieDetailsView()
     
     view = movieDetailsView
-    view.backgroundColor = .darkGray
+    view.backgroundColor = ColorHelper.darkPurple
+    movieDetailsView.bindView(movie: currentMovie)
   }
   
   override func viewDidLoad() {

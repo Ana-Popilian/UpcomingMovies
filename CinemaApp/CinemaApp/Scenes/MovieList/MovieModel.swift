@@ -14,7 +14,6 @@ struct MovieModel: Codable {
   let title: String
   let popularity: Double
   let image: String?
-  let voteAverage: Double
   let overview: String
   let releaseDate: String
   
@@ -23,7 +22,6 @@ struct MovieModel: Codable {
     case title
     case popularity
     case image = "poster_path"
-    case voteAverage = "vote_average"
     case overview
     case releaseDate = "release_date"
   }
