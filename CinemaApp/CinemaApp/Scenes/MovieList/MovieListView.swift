@@ -20,7 +20,6 @@ final class MovieListView: UIView {
   }
   
   private weak var delegate : MovieListDelegate?
-  
   private var isFetchingData = false
   private var movieData = [MovieModel]()
   private var activityIndicator: UIActivityIndicatorView!
@@ -29,11 +28,10 @@ final class MovieListView: UIView {
   required init(delegate: MovieListDelegate?) {
     self.delegate = delegate
     super.init(frame: .zero)
-       
+    
     setupActivityIndicator()
     setupCollectionView()
     
-  
     addSubviews()
     setupConstraints()
   }
@@ -52,8 +50,8 @@ final class MovieListView: UIView {
   func getDataCount() -> Int {
     movieData.count
   }
-  
 }
+
 
 //MARK: - Private Zone
 private extension MovieListView {
@@ -66,7 +64,7 @@ private extension MovieListView {
   }
   
   func setupCollectionView() {
-
+    
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
     collectionView.dataSource = self
@@ -78,11 +76,12 @@ private extension MovieListView {
 }
 
 
+//MARK: - UIScrollViewDelegate
 extension MovieListView: UIScrollViewDelegate {
   
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     if(collectionView.contentOffset.y >= (collectionView.contentSize.height - collectionView.frame.size.height - collectionView.contentSize.height * 0.1) && isFetchingData == false) {
-
+      
       isFetchingData = true
       delegate?.fetchNewData()
     }
@@ -100,6 +99,8 @@ extension MovieListView: UICollectionViewDelegate {
   }
 }
 
+
+//MARK: - UICOllectionViewDataSource
 extension MovieListView: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

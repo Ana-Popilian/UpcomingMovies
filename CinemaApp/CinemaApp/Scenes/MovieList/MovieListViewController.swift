@@ -36,6 +36,7 @@ final class MovieListViewController: UIViewController {
   }
 }
 
+
 //MARK: - Private Zone
 extension MovieListViewController: MovieListDelegate {
   
@@ -44,7 +45,6 @@ extension MovieListViewController: MovieListDelegate {
     nextViewController.currentMovie = movie
     navigationController?.pushViewController(nextViewController, animated: true)
   }
-  
   
   func fetchNewData() {
     let networkManager = NetworkManager()

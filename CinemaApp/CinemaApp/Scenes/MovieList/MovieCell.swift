@@ -87,7 +87,6 @@ private extension MovieCell {
     addSubviewWithoutConstraints(movieImageView)
     addSubviewWithoutConstraints(movieNameLabel)
     addSubviewWithoutConstraints(activityIndicator)
-    
   }
   
   func setupConstraints() {
@@ -102,7 +101,6 @@ private extension MovieCell {
       movieNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewTrait.defaultSpacing),
       movieNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultSpacing),
       movieNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ViewTrait.defaultSpacing),
-      
       
       activityIndicator.widthAnchor.constraint(equalToConstant: 30),
       activityIndicator.heightAnchor.constraint(equalToConstant: 30),
