@@ -18,16 +18,15 @@ final class MovieListViewController: UIViewController {
     mainView = MovieListView(delegate: self)
     view = mainView
   }
- 
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     title = "Upcoming Movies"
-    navigationController?.navigationBar.tintColor = ColorHelper.darkPurple
     
     navigationController?.navigationBar.barTintColor = ColorHelper.darkPurple
     navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-   
+    
     fetchNewData()
   }
   
@@ -51,7 +50,7 @@ extension MovieListViewController: MovieListDelegate {
     page += 1
     networkManager.getUpcomingMovies(page: page, completionHandler: { [weak self] (movies) in
       guard let self = self else { return }
-
+      
       if movies.isEmpty {
         return
       }

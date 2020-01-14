@@ -15,10 +15,6 @@ protocol MovieListDelegate: class {
 
 final class MovieListView: UIView {
   
-  private enum ViewTrait {
-    static let defaultVerticalSpacing: CGFloat = 10
-  }
-  
   private weak var delegate : MovieListDelegate?
   private var isFetchingData = false
   private var movieData = [MovieModel]()

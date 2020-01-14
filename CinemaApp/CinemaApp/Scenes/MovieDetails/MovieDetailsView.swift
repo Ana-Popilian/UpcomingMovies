@@ -33,6 +33,7 @@ final class MovieDetailsView : UIView{
   private let movieNameLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 16)
+    label.numberOfLines = 2
     label.textAlignment = .center
     label.textColor = .white
     return label
@@ -79,6 +80,7 @@ final class MovieDetailsView : UIView{
     
     guard let imageUrl = movie.image else {
       movieImageView.contentMode = .scaleAspectFit
+      movieImageView.image = UIImage(named: "ic_imagePlaceholder")!
       return
     }
 
@@ -124,7 +126,6 @@ private extension MovieDetailsView {
       movieOverviewTextView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
       movieOverviewTextView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
       movieOverviewTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: ViewTrait.bottomVerticalSpacing)
-      
     ])
   }
 }
