@@ -10,13 +10,13 @@ import UIKit
 
 extension UIImageView {
   
-  func downloadImage(fromUrl url: String, width: Int = 154, downloadFinishedHandler: @escaping (() -> Void)) {
+  func downloadImage(fromUrl url: String, width: Int = 154, downloadFinishedHandler: (() -> Void)? = nil) {
     
     let networkManager = NetworkManager()
     networkManager.fetchImage(imageUrl: url, width: width, completion: { data in
       guard let data = data else {
         DispatchQueue.main.async {
-          downloadFinishedHandler()
+          downloadFinishedHandler?()
         }
         return
       }
@@ -24,8 +24,13 @@ extension UIImageView {
       let image = UIImage(data: data)
       DispatchQueue.main.async {
         self.image = image
-        downloadFinishedHandler()
+        downloadFinishedHandler?()
       }
     })
+  }
+  
+  func addPlaceholder() {
+    self.contentMode = .scaleAspectFit
+    self.image = ImageHelper.defaultPlaceholder
   }
 }

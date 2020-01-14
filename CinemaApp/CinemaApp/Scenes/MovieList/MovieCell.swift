@@ -17,7 +17,6 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     static let defaultSpacing: CGFloat = 2
   }
   
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
@@ -58,8 +57,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     
     guard let imageUrl = movie.image else {
       activityIndicator.stopAnimating()
-      movieImageView.image = UIImage(named: "ic_imagePlaceholder")!
-      movieImageView.contentMode = .scaleAspectFit
+      movieImageView.addPlaceholder()
       return
     }
     movieImageView.downloadImage(fromUrl: imageUrl, downloadFinishedHandler: {
@@ -102,8 +100,6 @@ private extension MovieCell {
       movieNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultSpacing),
       movieNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ViewTrait.defaultSpacing),
       
-      activityIndicator.widthAnchor.constraint(equalToConstant: 30),
-      activityIndicator.heightAnchor.constraint(equalToConstant: 30),
       activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor),
       activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor)
     ])

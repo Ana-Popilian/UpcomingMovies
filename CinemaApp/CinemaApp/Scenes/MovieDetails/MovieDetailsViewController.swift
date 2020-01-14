@@ -21,8 +21,4 @@ final class MovieDetailsViewController: UIViewController {
     view.backgroundColor = ColorHelper.darkPurple
     movieDetailsView.bindView(movie: currentMovie)
   }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
 }

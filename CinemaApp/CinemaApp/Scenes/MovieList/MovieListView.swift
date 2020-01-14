@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MovieListDelegate: class {
+protocol MovieListDelegate where Self: UIViewController {
   func pushViewController(movie: MovieModel)
   func fetchNewData()
 }
@@ -20,6 +20,10 @@ final class MovieListView: UIView {
   private var movieData = [MovieModel]()
   private var activityIndicator: UIActivityIndicatorView!
   private var collectionView: UICollectionView!
+  
+  private enum ViewTrait {
+    static let defaultPadding: CGFloat = 8
+  }
   
   required init(delegate: MovieListDelegate?) {
     self.delegate = delegate
@@ -116,13 +120,14 @@ extension MovieListView: UICollectionViewDataSource {
 //MARK : - UICollectionViewDelegateFlowLayout
 extension MovieListView: UICollectionViewDelegateFlowLayout {
   
+  #warning("Extract magic numbers into constants like height")
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = (frame.width / 3 - 14)
     return CGSize(width: width, height: 100)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    return UIEdgeInsets(top: ViewTrait.defaultPadding, left: ViewTrait.defaultPadding, bottom: ViewTrait.defaultPadding, right: ViewTrait.defaultPadding)
   }
 }
 
@@ -141,7 +146,7 @@ private extension MovieListView {
       collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
       
       activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
       activityIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor),

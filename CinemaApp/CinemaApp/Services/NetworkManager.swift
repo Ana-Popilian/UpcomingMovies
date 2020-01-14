@@ -52,7 +52,7 @@ final class NetworkManager: NSObject {
     
     let request = URLRequest(url: url)
     let sessionConfig = URLSessionConfiguration.default
-    sessionConfig.timeoutIntervalForResource = 5
+    sessionConfig.timeoutIntervalForResource = 8
     
     let session = URLSession(configuration: sessionConfig)
     

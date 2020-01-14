@@ -29,10 +29,6 @@ final class MovieListViewController: UIViewController {
     
     fetchNewData()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
 }
 
 
