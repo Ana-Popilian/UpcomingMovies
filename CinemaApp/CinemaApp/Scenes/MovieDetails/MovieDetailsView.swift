@@ -16,6 +16,9 @@ final class MovieDetailsView : UIView {
     static let bottomVerticalSpacing: CGFloat = 30
     static let defaultHorizontalSpacing: CGFloat = 10
     static let imageHeight: CGFloat = 300
+    static let imageWidth: Int = 300
+    static let smallFontSize: UIFont = UIFont.boldSystemFont(ofSize: 14)
+    static let bigFontSize: UIFont = UIFont.boldSystemFont(ofSize: 16)
   }
   
   override init(frame: CGRect) {
@@ -31,7 +34,7 @@ final class MovieDetailsView : UIView {
   
   private let movieNameLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.boldSystemFont(ofSize: 16)
+    label.font = ViewTrait.bigFontSize
     label.numberOfLines = 2
     label.textAlignment = .center
     label.textColor = .white
@@ -45,10 +48,9 @@ final class MovieDetailsView : UIView {
     return imageView
   }()
   
-  #warning("Extract all font sizes into constants")
   private let movieReleaseDateLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.boldSystemFont(ofSize: 14)
+    label.font = ViewTrait.smallFontSize
     label.textAlignment = .center
     label.textColor = .white
     return label
@@ -56,7 +58,7 @@ final class MovieDetailsView : UIView {
   
   private let moviePopularityLabel: UILabel = {
     let label = UILabel()
-    label.font = UIFont.boldSystemFont(ofSize: 14)
+    label.font = ViewTrait.smallFontSize
     label.textAlignment = .center
     label.textColor = .white
     return label
@@ -64,7 +66,7 @@ final class MovieDetailsView : UIView {
   
   private let movieOverviewTextView: UITextView = {
     let textView = UITextView()
-    textView.font = UIFont.boldSystemFont(ofSize: 14)
+    textView.font = ViewTrait.smallFontSize
     textView.textAlignment = .natural
     textView.textColor = .white
     textView.isEditable = false
@@ -82,8 +84,7 @@ final class MovieDetailsView : UIView {
       movieImageView.addPlaceholder()
       return
     }
-#warning("Extract all font sizes into constants")
-    movieImageView.downloadImage(fromUrl: imageUrl, width: 300)
+    movieImageView.downloadImage(fromUrl: imageUrl, width: ViewTrait.imageWidth)
   }
 }
 

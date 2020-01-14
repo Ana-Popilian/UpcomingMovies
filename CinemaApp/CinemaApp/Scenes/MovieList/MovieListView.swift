@@ -23,6 +23,7 @@ final class MovieListView: UIView {
   
   private enum ViewTrait {
     static let defaultPadding: CGFloat = 8
+    static let height: CGFloat = 100
   }
   
   required init(delegate: MovieListDelegate?) {
@@ -120,10 +121,9 @@ extension MovieListView: UICollectionViewDataSource {
 //MARK : - UICollectionViewDelegateFlowLayout
 extension MovieListView: UICollectionViewDelegateFlowLayout {
   
-  #warning("Extract magic numbers into constants like height")
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = (frame.width / 3 - 14)
-    return CGSize(width: width, height: 100)
+    return CGSize(width: width, height: ViewTrait.height)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
