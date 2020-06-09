@@ -8,8 +8,8 @@ Cinema App is a sample displaying upcoming movies, using [themoviedb API](https:
 
 ### Image represent the movie list screen
 
-<img width="500" alt="Photo1" src="https://user-images.githubusercontent.com/55087937/72453520-80f45980-37bf-11ea-8d9d-9a5ab149a57b.png">
+<img width="300" alt="Photo1" src="https://user-images.githubusercontent.com/55087937/72453520-80f45980-37bf-11ea-8d9d-9a5ab149a57b.png">
 
 ### Image represent the movie details screen
 
-<img width="500" alt="Photo2" src="https://user-images.githubusercontent.com/55087937/72453543-8baeee80-37bf-11ea-95ba-09b6787ad858.png">
+<img width="300" alt="Photo2" src="https://user-images.githubusercontent.com/55087937/72453543-8baeee80-37bf-11ea-95ba-09b6787ad858.png">
