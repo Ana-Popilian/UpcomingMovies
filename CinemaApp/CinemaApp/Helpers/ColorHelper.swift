@@ -10,6 +10,6 @@ import UIKit
 
 enum ColorHelper {
   
-  static let customPurple: UIColor = UIColor(named: "customPurple")!
+  static let customGray: UIColor = UIColor(named: "customGray")!
   static let darkPurple: UIColor = UIColor(named: "darkPurple")!
 }

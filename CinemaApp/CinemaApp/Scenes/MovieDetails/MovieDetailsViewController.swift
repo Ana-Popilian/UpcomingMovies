@@ -17,8 +17,10 @@ final class MovieDetailsViewController: UIViewController {
     
     movieDetailsView = MovieDetailsView()
     
+    navigationController?.navigationBar.barTintColor = ColorHelper.customGray
+    navigationController?.navigationBar.tintColor = UIColor.black
+    
     view = movieDetailsView
-    view.backgroundColor = ColorHelper.darkPurple
     movieDetailsView.bindView(movie: currentMovie)
   }
 }

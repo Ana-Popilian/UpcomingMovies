@@ -24,8 +24,8 @@ final class MovieListViewController: UIViewController {
     
     title = "Upcoming Movies"
     
-    navigationController?.navigationBar.barTintColor = ColorHelper.darkPurple
-    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+    navigationController?.navigationBar.barTintColor = ColorHelper.customGray
+    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
     
     fetchNewData()
   }

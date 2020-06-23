@@ -22,8 +22,8 @@ final class MovieListView: UIView {
   private var collectionView: UICollectionView!
   
   private enum ViewTrait {
-    static let defaultPadding: CGFloat = 8
-    static let height: CGFloat = 100
+    static let defaultPadding: CGFloat = 10
+    static let height: CGFloat = 200
   }
   
   required init(delegate: MovieListDelegate?) {
@@ -65,12 +65,11 @@ private extension MovieListView {
   }
   
   func setupCollectionView() {
-    
     collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     collectionView.register(MovieCell.self, forCellWithReuseIdentifier: MovieCell.identifier)
     collectionView.dataSource = self
     collectionView.delegate = self
-    collectionView.backgroundColor = ColorHelper.customPurple
+    collectionView.backgroundColor = ColorHelper.customGray
     collectionView.showsVerticalScrollIndicator = true
     collectionView.indicatorStyle = .white
   }
@@ -136,8 +135,8 @@ extension MovieListView: UICollectionViewDelegateFlowLayout {
 private extension MovieListView {
   
   func addSubviews() {
-    addSubviewWithoutConstraints(activityIndicator)
-    addSubviewWithoutConstraints(collectionView)
+    addSubviewWC(activityIndicator)
+    addSubviewWC(collectionView)
   }
   
   func setupConstraints() {
@@ -146,7 +145,7 @@ private extension MovieListView {
       collectionView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
       collectionView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
       collectionView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-      collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
       
       activityIndicator.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
       activityIndicator.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor),
