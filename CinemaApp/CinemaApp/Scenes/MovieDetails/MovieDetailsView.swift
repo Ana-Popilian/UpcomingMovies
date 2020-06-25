@@ -11,17 +11,16 @@ import UIKit
 
 final class MovieDetailsView : UIView {
   
-  private var movieNameLabel: UILabel!
   private var movieImageView: UIImageView!
   private var movieReleaseDateLabel: UILabel!
   private var moviePopularityLabel: UILabel!
-  private var movieOverviewTextView: UILabel!
+  private var movieOverviewLabel: UILabel!
   
   private enum ViewTrait {
     static let defaultVerticalSpacing: CGFloat = 15
     static let defaultHorizontalSpacing: CGFloat = 10
-    static let imageHeight: Int = 350
-    static let imageWidth: Int = 300
+    static let imageHeight: CGFloat = UIScreen.main.bounds.height * 0.4
+    static let imageWidth: Int = 500
     static let smallFontSize: UIFont = UIFont.systemFont(ofSize: 14)
     static let bigFontSize: UIFont = UIFont.boldSystemFont(ofSize: 15)
   }
@@ -30,7 +29,6 @@ final class MovieDetailsView : UIView {
     super.init(frame: frame)
     backgroundColor = ColorHelper.customGray
     
-    setupMovieNameLabel()
     setupMovieImageView()
     setupMovieReleaseDateLabel()
     setupMoviePopularityLabel()
@@ -45,10 +43,9 @@ final class MovieDetailsView : UIView {
   }
 
   func bindView(movie: MovieModel) {
-    movieNameLabel.text = movie.title
     movieReleaseDateLabel.text = ("Release Date: \(movie.releaseDate)")
     moviePopularityLabel.text = ("Popularity: \(movie.popularity)")
-    movieOverviewTextView.text = ("Overview \n\(movie.overview)")
+    movieOverviewLabel.text = ("Overview \n\(movie.overview)")
     
     guard let imageUrl = movie.image else {
       movieImageView.addPlaceholder()
@@ -61,14 +58,6 @@ final class MovieDetailsView : UIView {
 
 // MARK: - Private Zone
 private extension MovieDetailsView {
-  
-  func setupMovieNameLabel() {
-    movieNameLabel = UILabel()
-    movieNameLabel.font = ViewTrait.bigFontSize
-    movieNameLabel.numberOfLines = 2
-    movieNameLabel.textAlignment = .center
-    movieNameLabel.textColor = .black
-  }
   
   func setupMovieImageView() {
     movieImageView = UIImageView()
@@ -91,11 +80,11 @@ private extension MovieDetailsView {
   }
   
   func setupMovieOverviewTextView() {
-    movieOverviewTextView = UILabel()
-    movieOverviewTextView.font = ViewTrait.smallFontSize
-    movieOverviewTextView.textAlignment = .natural
-    movieOverviewTextView.textColor = .black
-    movieOverviewTextView.numberOfLines = 20
+    movieOverviewLabel = UILabel()
+    movieOverviewLabel.font = ViewTrait.smallFontSize
+    movieOverviewLabel.textAlignment = .natural
+    movieOverviewLabel.textColor = .black
+    movieOverviewLabel.numberOfLines = 20
   }
 }
 
@@ -104,24 +93,19 @@ private extension MovieDetailsView {
 private extension MovieDetailsView {
   
   func addSubviews() {
-    addSubviewWC(movieNameLabel)
     addSubviewWC(movieImageView)
     addSubviewWC(movieReleaseDateLabel)
     addSubviewWC(moviePopularityLabel)
-    addSubviewWC(movieOverviewTextView)
+    addSubviewWC(movieOverviewLabel)
   }
   
   func setupConstraints() {
     NSLayoutConstraint.activate([
       
-      movieNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: ViewTrait.defaultVerticalSpacing),
-      movieNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-      movieNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-      
-      movieImageView.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+      movieImageView.topAnchor.constraint(equalTo:safeAreaLayoutGuide.topAnchor),
       movieImageView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
-      movieImageView.widthAnchor.constraint(equalToConstant: CGFloat(ViewTrait.imageHeight)),
-      movieImageView.heightAnchor.constraint(equalToConstant: CGFloat(ViewTrait.imageHeight)),
+      movieImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+      movieImageView.heightAnchor.constraint(equalToConstant: ViewTrait.imageHeight),
       
       movieReleaseDateLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
       movieReleaseDateLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -131,10 +115,10 @@ private extension MovieDetailsView {
       moviePopularityLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
       moviePopularityLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
       
-      movieOverviewTextView.topAnchor.constraint(equalTo: moviePopularityLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
-      movieOverviewTextView.leadingAnchor.constraint(equalTo: movieImageView.leadingAnchor),
-      movieOverviewTextView.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor),
-      movieOverviewTextView.bottomAnchor.constraint(equalTo: bottomAnchor)
+      movieOverviewLabel.topAnchor.constraint(equalTo: moviePopularityLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+      movieOverviewLabel.leadingAnchor.constraint(equalTo: movieImageView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
+      movieOverviewLabel.trailingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
+      movieOverviewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50)
     ])
   }
 }

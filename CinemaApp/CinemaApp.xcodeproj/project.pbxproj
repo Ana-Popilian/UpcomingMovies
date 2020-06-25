@@ -163,8 +163,8 @@
 		A13EB26723A3FF2A0076F3D5 /* MovieDetails */ = {
 			isa = PBXGroup;
 			children = (
-				A13EB26823A3FF420076F3D5 /* MovieDetailsView.swift */,
 				A13EB26A23A3FF560076F3D5 /* MovieDetailsViewController.swift */,
+				A13EB26823A3FF420076F3D5 /* MovieDetailsView.swift */,
 			);
 			path = MovieDetails;
 			sourceTree = "<group>";

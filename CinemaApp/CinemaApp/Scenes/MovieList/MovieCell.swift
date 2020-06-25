@@ -25,6 +25,16 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     backgroundColor = ColorHelper.customGray
     layer.cornerRadius = 10
     clipsToBounds = true
+    
+//    layer.shadowColor = UIColor.red.cgColor
+//    layer.shadowOpacity = 0.5
+//    layer.masksToBounds = false
+//    layer.shadowOffset = .zero
+//    layer.shadowRadius = 2
+//    layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+//    layer.shouldRasterize = true
+//    layer.rasterizationScale = UIScreen.main.scale
+    
     setupContainerView()
     setupMovieImageView()
     setupMovieNameLabel()
@@ -60,7 +70,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
 }
 
 
-//MARK: Private Zone
+//MARK: - Private Zone
 private extension MovieCell {
   
   func setupActivity() {
@@ -72,16 +82,15 @@ private extension MovieCell {
   func setupContainerView() {
     containerView = UIView()
     containerView.backgroundColor = .white
-    
   }
   
   func setupMovieImageView() {
-   movieImageView = UIImageView()
+    movieImageView = UIImageView()
     movieImageView.contentMode = .scaleAspectFill
   }
   
   func setupMovieNameLabel() {
-   movieNameLabel = UILabel()
+    movieNameLabel = UILabel()
     movieNameLabel.font = UIFont.systemFont(ofSize: 13)
     movieNameLabel.textAlignment = .center
     movieNameLabel.textColor = .black

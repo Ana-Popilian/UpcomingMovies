@@ -23,4 +23,13 @@ final class MovieDetailsViewController: UIViewController {
     view = movieDetailsView
     movieDetailsView.bindView(movie: currentMovie)
   }
+  
+  func setTitle(movie: MovieModel) {
+    title = movie.title
+  }
+  
+  override func viewDidLoad() {
+      super.viewDidLoad()
+     setTitle(movie: currentMovie)
+  }
 }
