@@ -12,16 +12,18 @@ struct MovieModel: Codable {
   
   let id: Int
   let title: String
-  let popularity: Double
-  let image: String?
+  let vote: Double
+  let portraitPath: String?
+  let backdropPath: String?
   let overview: String
   let releaseDate: String
   
   private enum CodingKeys: String, CodingKey {
     case id
     case title
-    case popularity
-    case image = "poster_path"
+    case vote = "vote_average"
+    case backdropPath = "backdrop_path"
+    case portraitPath = "poster_path"
     case overview
     case releaseDate = "release_date"
   }

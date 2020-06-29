@@ -26,14 +26,6 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     layer.cornerRadius = 10
     clipsToBounds = true
     
-//    layer.shadowColor = UIColor.red.cgColor
-//    layer.shadowOpacity = 0.5
-//    layer.masksToBounds = false
-//    layer.shadowOffset = .zero
-//    layer.shadowRadius = 2
-//    layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-//    layer.shouldRasterize = true
-//    layer.rasterizationScale = UIScreen.main.scale
     
     setupContainerView()
     setupMovieImageView()
@@ -58,7 +50,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
     activityIndicator.startAnimating()
     movieNameLabel.text = movie.title
     
-    guard let imageUrl = movie.image else {
+    guard let imageUrl = movie.portraitPath else {
       activityIndicator.stopAnimating()
       movieImageView.addPlaceholder()
       return
@@ -82,6 +74,13 @@ private extension MovieCell {
   func setupContainerView() {
     containerView = UIView()
     containerView.backgroundColor = .white
+    containerView.layer.shadowColor = UIColor.red.cgColor
+    containerView.layer.shadowOpacity = 1
+    containerView.layer.shadowOffset = .zero
+    containerView.layer.shadowRadius = 3
+    containerView.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+    containerView.layer.shouldRasterize = true
+    containerView.layer.rasterizationScale = UIScreen.main.scale
   }
   
   func setupMovieImageView() {
@@ -90,10 +89,8 @@ private extension MovieCell {
   }
   
   func setupMovieNameLabel() {
-    movieNameLabel = UILabel()
-    movieNameLabel.font = UIFont.systemFont(ofSize: 13)
-    movieNameLabel.textAlignment = .center
-    movieNameLabel.textColor = .black
+    let font = UIFont.systemFont(ofSize: 13)
+    movieNameLabel = UILabel(font: font, textAlignment: .center, textColor: .black)
     movieNameLabel.numberOfLines = 2
   }
 }
