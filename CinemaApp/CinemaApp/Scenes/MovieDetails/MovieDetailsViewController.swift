@@ -22,14 +22,16 @@ final class MovieDetailsViewController: UIViewController {
     
     view = movieDetailsView
     movieDetailsView.bindView(movie: currentMovie)
+    setTitle()
   }
   
-  func setTitle(movie: MovieModel) {
-    title = movie.title
-  }
-  
-  override func viewDidLoad() {
-      super.viewDidLoad()
-     setTitle(movie: currentMovie)
+  func setTitle() {
+    let label = UILabel()
+    label.text = currentMovie.title
+    label.numberOfLines = 2
+    label.font =  UIFont.systemFont(ofSize: 16)
+    label.textAlignment = .center
+    
+    self.navigationItem.titleView = label
   }
 }

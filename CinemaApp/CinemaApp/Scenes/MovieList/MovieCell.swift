@@ -16,22 +16,20 @@ final class MovieCell: UICollectionViewCell, Identifiable {
   private var movieNameLabel: UILabel!
   
   private enum ViewTrait {
-    static let movieImageHeight: CGFloat = 160
-    static let defaultSpacing: CGFloat = 5
+    static let movieImageHeight: CGFloat = 150
+    static let defaultSpacing: CGFloat = 3
   }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = ColorHelper.customGray
-    layer.cornerRadius = 10
-    clipsToBounds = true
     
+    dropShadow()
     
     setupContainerView()
     setupMovieImageView()
     setupMovieNameLabel()
     
-    setupActivity()
+    setupActivityIndicator()
     addSubviews()
     setupConstraints()
   }
@@ -65,7 +63,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
 //MARK: - Private Zone
 private extension MovieCell {
   
-  func setupActivity() {
+  func setupActivityIndicator() {
     activityIndicator = UIActivityIndicatorView(style: .large)
     activityIndicator.color = .black
     activityIndicator.hidesWhenStopped = true
@@ -74,13 +72,8 @@ private extension MovieCell {
   func setupContainerView() {
     containerView = UIView()
     containerView.backgroundColor = .white
-    containerView.layer.shadowColor = UIColor.red.cgColor
-    containerView.layer.shadowOpacity = 1
-    containerView.layer.shadowOffset = .zero
-    containerView.layer.shadowRadius = 3
-    containerView.layer.shadowPath = UIBezierPath(rect: bounds).cgPath
-    containerView.layer.shouldRasterize = true
-    containerView.layer.rasterizationScale = UIScreen.main.scale
+    containerView.layer.cornerRadius = 10
+    containerView.clipsToBounds = true
   }
   
   func setupMovieImageView() {
@@ -91,7 +84,7 @@ private extension MovieCell {
   func setupMovieNameLabel() {
     let font = UIFont.systemFont(ofSize: 13)
     movieNameLabel = UILabel(font: font, textAlignment: .center, textColor: .black)
-    movieNameLabel.numberOfLines = 2
+    movieNameLabel.numberOfLines = 3
   }
 }
 
@@ -108,10 +101,10 @@ private extension MovieCell {
   
   func setupConstraints() {
     NSLayoutConstraint.activate([
-      containerView.topAnchor.constraint(equalTo: topAnchor),
-      containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
+      containerView.topAnchor.constraint(equalTo: topAnchor, constant: 3),
+      containerView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 3),
+      containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -3),
+      containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3),
       
       movieImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
       movieImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
@@ -119,9 +112,9 @@ private extension MovieCell {
       movieImageView.heightAnchor.constraint(equalToConstant: ViewTrait.movieImageHeight),
       
       movieNameLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: ViewTrait.defaultSpacing),
-      movieNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-      movieNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-      movieNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
+      movieNameLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultSpacing),
+      movieNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultSpacing),
+      movieNameLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
       
       activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
       activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)

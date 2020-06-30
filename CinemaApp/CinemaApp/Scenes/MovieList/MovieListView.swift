@@ -23,13 +23,13 @@ final class MovieListView: UIView {
   
   private enum ViewTrait {
     static let defaultPadding: CGFloat = 10
-    static let height: CGFloat = 200
+    static let height: CGFloat = 220
   }
   
   required init(delegate: MovieListDelegate?) {
     self.delegate = delegate
     super.init(frame: .zero)
-    
+    backgroundColor = ColorHelper.customGray
     setupActivityIndicator()
     setupCollectionView()
     
@@ -59,7 +59,7 @@ private extension MovieListView {
   
   func setupActivityIndicator() {
     activityIndicator = UIActivityIndicatorView(style: .large)
-    activityIndicator.color = .white
+    activityIndicator.color = .black
     activityIndicator.hidesWhenStopped = true
     activityIndicator.startAnimating()
   }

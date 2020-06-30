@@ -14,9 +14,10 @@ final class MovieDetailsView : UIView {
   private var scrollView: UIScrollView!
   private var containerView: UIView!
   private var movieImageView: UIImageView!
-  private var separatorView: UIView!
-  private var movieReleaseDateLabel: UILabel!
   private var userScoreLabel: UILabel!
+  private var separatorView: UIView!
+  private var movieGenreLabel: UILabel!
+  private var movieReleaseDateLabel: UILabel!
   private var movieOverviewLabel: UILabel!
   
   private enum ViewTrait {
@@ -34,6 +35,7 @@ final class MovieDetailsView : UIView {
     setupContainerView()
     setupMovieImageView()
     setupSeparatorView()
+    setupMovieGenreLabel()
     setupMovieReleaseDateLabel()
     setupUserScoreLabel()
     setupMovieOverviewTextView()
@@ -56,6 +58,7 @@ final class MovieDetailsView : UIView {
     let date: Date? = dateFormatterGet.date(from: movie.releaseDate)
     let formattedDate = dateFormatter.string(from: date!)
     
+    movieGenreLabel.text = "Genre: \(movie.genre)"
     movieReleaseDateLabel.text = "Release Date: \(formattedDate)"
     userScoreLabel.text = ("User Score: \(movie.vote) / 10")
     movieOverviewLabel.text = ("Overview \n\n \(movie.overview)")
@@ -96,6 +99,11 @@ private extension MovieDetailsView {
     separatorView.backgroundColor = .black
   }
   
+  func setupMovieGenreLabel() {
+    let font = UIFont.systemFont(ofSize: 14)
+    movieGenreLabel = UILabel(text: "Genre:", font: font, textAlignment: .natural, textColor: .black)
+  }
+  
   func setupMovieReleaseDateLabel() {
     let font = UIFont.systemFont(ofSize: 14)
     movieReleaseDateLabel = UILabel(font: font, textAlignment: .natural, textColor: .black)
@@ -118,6 +126,7 @@ private extension MovieDetailsView {
     containerView.addSubviewWC(movieImageView)
     containerView.addSubviewWC(userScoreLabel)
     containerView.addSubviewWC(separatorView)
+    containerView.addSubviewWC(movieGenreLabel)
     containerView.addSubviewWC(movieReleaseDateLabel)
     containerView.addSubviewWC(movieOverviewLabel)
   }
@@ -149,7 +158,11 @@ private extension MovieDetailsView {
       separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
       separatorView.heightAnchor.constraint(equalToConstant: ViewTrait.separatorHeight),
       
-      movieReleaseDateLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+      movieGenreLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+      movieGenreLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
+      movieGenreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
+      
+      movieReleaseDateLabel.topAnchor.constraint(equalTo: movieGenreLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
       movieReleaseDateLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
       movieReleaseDateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
       

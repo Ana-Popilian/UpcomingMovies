@@ -17,17 +17,20 @@ final class MovieListViewController: UIViewController {
   override func loadView() {
     mainView = MovieListView(delegate: self)
     view = mainView
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    title = "Upcoming Movies"
     
     navigationController?.navigationBar.barTintColor = ColorHelper.customGray
-    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
     
+    setTitle()
     fetchNewData()
+    getGenreData()
+  }
+  
+  func setTitle() {
+    let label = UILabel()
+    label.text = "Upcoming Movies"
+    label.font =  UIFont.systemFont(ofSize: 16)
+    label.textAlignment = .center
+    self.navigationItem.titleView = label
   }
 }
 
@@ -61,6 +64,14 @@ extension MovieListViewController: MovieListDelegate {
       DispatchQueue.main.async {
         self.mainView.insertNewItems(movies, at: indexPaths)
       }
+    })
+  }
+  
+  func getGenreData() {
+    let networkManager = NetworkManager()
+    networkManager.fetchMovieGenres(completionHandler: { [weak self] (genre) in
+      guard self != nil else { return }
+      print(genre)
     })
   }
 }
