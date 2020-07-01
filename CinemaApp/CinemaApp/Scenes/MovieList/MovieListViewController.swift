@@ -14,6 +14,10 @@ final class MovieListViewController: UIViewController {
   private var page = 0
   private var mainView: MovieListView!
   
+  override func viewDidAppear(_ animated: Bool) {
+    navigationController?.navigationBar.barStyle = .black
+  }
+  
   override func loadView() {
     mainView = MovieListView(delegate: self)
     view = mainView
@@ -25,11 +29,13 @@ final class MovieListViewController: UIViewController {
     getGenreData()
   }
   
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    .lightContent
+  }
+  
   func setTitle() {
-    let label = UILabel()
-    label.text = "Upcoming Movies"
-    label.font =  UIFont.systemFont(ofSize: 16)
-    label.textAlignment = .center
+    let font =  UIFont.systemFont(ofSize: 16)
+    let label = UILabel(text: "Upcoming Movies", font: font, textAlignment: .center, textColor: .white)
     self.navigationItem.titleView = label
   }
 }

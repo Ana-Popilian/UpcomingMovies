@@ -91,27 +91,27 @@ private extension MovieDetailsView {
   
   func setupUserScoreLabel() {
      let font = UIFont.systemFont(ofSize: 15)
-     userScoreLabel = UILabel(font: font, textAlignment: .center, textColor: .black)
+     userScoreLabel = UILabel(font: font, textAlignment: .center, textColor: .white)
    }
   
   func setupSeparatorView() {
     separatorView = UIView()
-    separatorView.backgroundColor = .black
+    separatorView.backgroundColor = .white
   }
   
   func setupMovieGenreLabel() {
     let font = UIFont.systemFont(ofSize: 14)
-    movieGenreLabel = UILabel(text: "Genre:", font: font, textAlignment: .natural, textColor: .black)
+    movieGenreLabel = UILabel(text: "Genre:", font: font, textAlignment: .natural, textColor: .white)
   }
   
   func setupMovieReleaseDateLabel() {
     let font = UIFont.systemFont(ofSize: 14)
-    movieReleaseDateLabel = UILabel(font: font, textAlignment: .natural, textColor: .black)
+    movieReleaseDateLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
   }
   
   func setupMovieOverviewTextView() {
     let font = UIFont.systemFont(ofSize: 14)
-    movieOverviewLabel = UILabel(font: font, textAlignment: .natural, textColor: .black)
+    movieOverviewLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
     movieOverviewLabel.numberOfLines = 0
   }
 }

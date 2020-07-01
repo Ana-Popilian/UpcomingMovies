@@ -18,7 +18,7 @@ final class MovieDetailsViewController: UIViewController {
     movieDetailsView = MovieDetailsView()
     
     navigationController?.navigationBar.barTintColor = ColorHelper.customGray
-    navigationController?.navigationBar.tintColor = UIColor.black
+    navigationController?.navigationBar.tintColor = UIColor.white
     
     view = movieDetailsView
     movieDetailsView.bindView(movie: currentMovie)
@@ -26,12 +26,9 @@ final class MovieDetailsViewController: UIViewController {
   }
   
   func setTitle() {
-    let label = UILabel()
-    label.text = currentMovie.title
+    let font =  UIFont.systemFont(ofSize: 16)
+    let label = UILabel(text: currentMovie.title, font: font, textAlignment: .center, textColor: .white)
     label.numberOfLines = 2
-    label.font =  UIFont.systemFont(ofSize: 16)
-    label.textAlignment = .center
-    
     self.navigationItem.titleView = label
   }
 }

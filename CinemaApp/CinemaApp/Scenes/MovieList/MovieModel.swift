@@ -31,7 +31,6 @@ struct MovieModel: Codable {
   }
 }
 
-
 struct Movies: Codable {
   var results: [MovieModel]
 }
