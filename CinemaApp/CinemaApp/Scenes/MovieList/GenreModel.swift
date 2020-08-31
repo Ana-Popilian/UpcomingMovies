@@ -9,7 +9,6 @@
 import Foundation
 
 struct GenreModel: Codable {
-  
   let id: Int
   let name: String
 }

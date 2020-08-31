@@ -13,6 +13,7 @@ final class MovieListViewController: UIViewController {
   
   private var page = 0
   private var mainView: MovieListView!
+  private var networkManager = NetworkManager()
   
   override func viewDidAppear(_ animated: Bool) {
     navigationController?.navigationBar.barStyle = .black
@@ -44,40 +45,61 @@ final class MovieListViewController: UIViewController {
 //MARK: - Private Zone
 extension MovieListViewController: MovieListDelegate {
   
-  func pushViewController(movie: MovieModel) {
+  func pushViewController(movie: MovieModel, genres: Genres) {
     let nextViewController = MovieDetailsViewController()
     nextViewController.currentMovie = movie
+    nextViewController.genreData = genres
     navigationController?.pushViewController(nextViewController, animated: true)
   }
   
   func fetchNewData() {
-    let networkManager = NetworkManager()
     page += 1
-    networkManager.getUpcomingMovies(page: page, completionHandler: { [weak self] (movies) in
-      guard let self = self else { return }
-      
-      if movies.isEmpty {
-        return
+    
+    let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=6dac60d5bfa0f64225d7b8e75c53069e&language=en-US&page=\(page)")!
+    
+    networkManager.getData(of: Movies.self, from: url) { (response) in
+      switch response {
+        
+      case .failure(let error):
+        if error is DataError {
+          print(error)
+        } else {
+          print(error.localizedDescription)
+        }
+        print(error.localizedDescription)
+        
+      case .success(let movies):
+        
+        var indexPaths = [IndexPath]()
+        let startIndex = self.mainView.getDataCount()
+        
+        for (index, _) in movies.results.enumerated() {
+          indexPaths.append(IndexPath(row: startIndex + index, section: 0))
+        }
+        DispatchQueue.main.async {
+          self.mainView.insertNewItems(movies.results, at: indexPaths)
+        }
       }
-      
-      var indexPaths = [IndexPath]()
-      let startIndex = self.mainView.getDataCount()
-      
-      for (index, _) in movies.enumerated() {
-        indexPaths.append(IndexPath(row: startIndex + index, section: 0))
-      }
-      
-      DispatchQueue.main.async {
-        self.mainView.insertNewItems(movies, at: indexPaths)
-      }
-    })
+    }
   }
   
   func getGenreData() {
     let networkManager = NetworkManager()
-    networkManager.fetchMovieGenres(completionHandler: { [weak self] (genre) in
-      guard self != nil else { return }
-      print(genre)
-    })
+    let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=6dac60d5bfa0f64225d7b8e75c53069e&language=en-US")!
+    networkManager.getData(of: Genres.self, from: url) { (response) in
+      
+      switch response {
+      case .failure(let error):
+        if error is DataError {
+          print(error)
+        } else {
+          print(error.localizedDescription)
+        }
+        print(error.localizedDescription)
+        
+      case .success(let result):
+        self.mainView.updateGenres(result)
+      }
+    }
   }
 }

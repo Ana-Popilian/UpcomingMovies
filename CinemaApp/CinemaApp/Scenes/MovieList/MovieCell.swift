@@ -16,7 +16,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
   private var movieNameLabel: UILabel!
   
   private enum ViewTrait {
-    static let movieImageHeight: CGFloat = 150
+    static let movieImageHeight: CGFloat = 140
     static let defaultSpacing: CGFloat = 3
   }
   
@@ -82,7 +82,7 @@ private extension MovieCell {
   }
   
   func setupMovieNameLabel() {
-    let font = UIFont.systemFont(ofSize: 13)
+    let font = UIFont.systemFont(ofSize: 12)
     movieNameLabel = UILabel(font: font, textAlignment: .center, textColor: .black)
     movieNameLabel.numberOfLines = 3
   }

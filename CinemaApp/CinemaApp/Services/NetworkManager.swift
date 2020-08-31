@@ -8,39 +8,47 @@
 
 import UIKit
 
+enum DataError: Error {
+  case invalidResponse
+  case invalidData
+  case decodingError
+  case serverError
+}
+
 final class NetworkManager: NSObject {
+  
+  typealias result<T> = (Result <T, Error>) -> Void
+  
+  func getData<T: Decodable>(of type: T.Type,
+                             from url: URL,
+                             completion: @escaping result<T>) {
     
-  func getUpcomingMovies(page: Int, completionHandler: @escaping (_ movies: [MovieModel]) -> Void) {
-    
-    guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=6dac60d5bfa0f64225d7b8e75c53069e&language=en-US&page=\(page)") else {
-      fatalError("url must be valid!!!")
-    }
-    
-    let request = URLSession.shared.dataTask(with: url) { (data, response, error) in
-      
-      do {
-        let decoder = JSONDecoder()
-        let response = try decoder.decode(Movies.self, from: data!)
+    URLSession.shared.dataTask(with: url) {(data, response, error) in
+      if let error = error {
+        completion (.failure(error))
         
-        completionHandler(response.results)
-        
-      } catch let DecodingError.dataCorrupted(context) {
-        print(context)
-      } catch let DecodingError.keyNotFound(key, context) {
-        print("Key '\(key)' not found:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch let DecodingError.valueNotFound(value, context) {
-        print("Value '\(value)' not found:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch let DecodingError.typeMismatch(type, context)  {
-        print("Type '\(type)' mismatch:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch {
-        print("error: ", error)
       }
-    }
-    
-    request.resume()
+      
+      guard let response = response as? HTTPURLResponse else {
+        completion(.failure(DataError.invalidResponse))
+        return
+      }
+      
+      if 200 ... 299 ~= response.statusCode {
+        if let data = data {
+          do {
+            let decodedData: T = try JSONDecoder().decode(type, from: data);  completion(.success(decodedData))
+          }
+          catch {
+            completion(.failure(DataError.decodingError))
+          }
+        } else {
+          completion(.failure(DataError.invalidData))
+        }
+      } else {
+        completion(.failure(DataError.serverError))
+      }
+    } .resume()
   }
   
   func fetchImage(imageUrl: String, width: Int, completion: @escaping (Data?) -> ()) {
@@ -59,39 +67,4 @@ final class NetworkManager: NSObject {
     })
     task.resume()
   }
-  
-  func fetchMovieGenres( completionHandler: @escaping (_ genres: [GenreModel]) -> Void ) {
-  
-    guard let url = URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=6dac60d5bfa0f64225d7b8e75c53069e&language=en-US") else {
-      fatalError("url must be valid!!!")
-    }
-    
-    let request = URLSession.shared.dataTask(with: url) { (data, response, error) in
-      
-      do {
-        let decoder = JSONDecoder()
-        let response = try decoder.decode(Genres.self, from: data!)
-        
-        completionHandler(response.genres)
-        
-      } catch let DecodingError.dataCorrupted(context) {
-        print(context)
-      } catch let DecodingError.keyNotFound(key, context) {
-        print("Key '\(key)' not found:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch let DecodingError.valueNotFound(value, context) {
-        print("Value '\(value)' not found:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch let DecodingError.typeMismatch(type, context)  {
-        print("Type '\(type)' mismatch:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch {
-        print("error: ", error)
-      }
-    }
-  
-    request.resume()
-  }
 }
-
-

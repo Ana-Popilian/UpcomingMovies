@@ -9,21 +9,22 @@
 import UIKit
 
 protocol MovieListDelegate where Self: UIViewController {
-  func pushViewController(movie: MovieModel)
+  func pushViewController(movie: MovieModel, genres: Genres)
   func fetchNewData()
 }
 
 final class MovieListView: UIView {
   
-  private weak var delegate : MovieListDelegate?
+  private weak var delegate: MovieListDelegate?
   private var isFetchingData = false
   private var movieData = [MovieModel]()
+  private var genreData: Genres!
   private var activityIndicator: UIActivityIndicatorView!
   private var collectionView: UICollectionView!
   
   private enum ViewTrait {
     static let defaultPadding: CGFloat = 5
-    static let height: CGFloat = 220
+    static let height: CGFloat = 210
   }
   
   required init(delegate: MovieListDelegate?) {
@@ -46,6 +47,10 @@ final class MovieListView: UIView {
     activityIndicator.stopAnimating()
     collectionView.insertItems(at: indexPaths)
     isFetchingData = false
+  }
+  
+  func updateGenres(_ genres: Genres) {
+    genreData = genres
   }
   
   func getDataCount() -> Int {
@@ -94,8 +99,9 @@ extension MovieListView: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let movie = movieData[indexPath.row]
+    let genres = genreData
     
-    delegate?.pushViewController(movie: movie)
+    delegate?.pushViewController(movie: movie, genres: genres! )
   }
 }
 
@@ -117,12 +123,11 @@ extension MovieListView: UICollectionViewDataSource {
 }
 
 
-//MARK : - UICollectionViewDelegateFlowLayout
+//MARK: - UICollectionViewDelegateFlowLayout
 extension MovieListView: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width : CGFloat = UIScreen.main.bounds.width / 3 - 10
-//      (frame.width / 3 - 14)
     return CGSize(width: width, height: ViewTrait.height)
   }
   

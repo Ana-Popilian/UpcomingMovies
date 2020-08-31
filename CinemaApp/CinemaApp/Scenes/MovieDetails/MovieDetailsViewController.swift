@@ -10,6 +10,7 @@ import UIKit
 
 final class MovieDetailsViewController: UIViewController {
   
+  var genreData : Genres!
   var currentMovie: MovieModel!
   private var movieDetailsView: MovieDetailsView!
   
@@ -22,6 +23,8 @@ final class MovieDetailsViewController: UIViewController {
     
     view = movieDetailsView
     movieDetailsView.bindView(movie: currentMovie)
+    setGenres() 
+    
     setTitle()
   }
   
@@ -30,5 +33,13 @@ final class MovieDetailsViewController: UIViewController {
     let label = UILabel(text: currentMovie.title, font: font, textAlignment: .center, textColor: .white)
     label.numberOfLines = 2
     self.navigationItem.titleView = label
+  }
+  
+  func setGenres() {
+    let genresNames = genreData.genres
+      .filter { currentMovie.genre.contains($0.id) }
+      .map { $0.name }
+    
+    movieDetailsView.setGenres(genresNames)
   }
 }

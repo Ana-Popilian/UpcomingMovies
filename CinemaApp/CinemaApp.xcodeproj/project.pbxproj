@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A100C42124ACBA36001411BF /* GenresData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A100C41F24ACBA36001411BF /* GenresData.xcdatamodeld */; };
-		A100C42424ACBC2A001411BF /* Genre+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100C42224ACBC2A001411BF /* Genre+CoreDataClass.swift */; };
-		A100C42524ACBC2A001411BF /* Genre+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A100C42324ACBC2A001411BF /* Genre+CoreDataProperties.swift */; };
 		A10EF1CC23A280ED008FCBF8 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10EF1CB23A280ED008FCBF8 /* Color.xcassets */; };
 		A10EF1CF23A281DC008FCBF8 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10EF1CE23A281DC008FCBF8 /* ColorHelper.swift */; };
 		A11C3DF5238D36750099B67F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11C3DF4238D36750099B67F /* AppDelegate.swift */; };
@@ -31,9 +28,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A100C42024ACBA36001411BF /* GenresData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GenresData.xcdatamodel; sourceTree = "<group>"; };
-		A100C42224ACBC2A001411BF /* Genre+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Genre+CoreDataClass.swift"; sourceTree = "<group>"; };
-		A100C42324ACBC2A001411BF /* Genre+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Genre+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A10EF1CB23A280ED008FCBF8 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		A10EF1CE23A281DC008FCBF8 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		A11C3DF1238D36750099B67F /* CinemaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CinemaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,15 +61,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A100C42624ACBCF7001411BF /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				A100C42224ACBC2A001411BF /* Genre+CoreDataClass.swift */,
-				A100C42324ACBC2A001411BF /* Genre+CoreDataProperties.swift */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		A10EF1CD23A281B4008FCBF8 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,7 +89,6 @@
 		A11C3DF3238D36750099B67F /* CinemaApp */ = {
 			isa = PBXGroup;
 			children = (
-				A100C42624ACBCF7001411BF /* Data */,
 				A11C3E0C238D48960099B67F /* Scenes */,
 				A11C3E1B238D6DB80099B67F /* Protocols */,
 				A11C3E10238D62970099B67F /* Services */,
@@ -150,7 +134,6 @@
 			children = (
 				A11C3DFD238D36760099B67F /* Assets.xcassets */,
 				A10EF1CB23A280ED008FCBF8 /* Color.xcassets */,
-				A100C41F24ACBA36001411BF /* GenresData.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -268,7 +251,6 @@
 				A14DDBBC24AA53A200458175 /* UILabel+Additions.swift in Sources */,
 				A11C3E12238D62AD0099B67F /* NetworkManager.swift in Sources */,
 				A1D4E4672397FE57002947A2 /* UIImageView+Download.swift in Sources */,
-				A100C42524ACBC2A001411BF /* Genre+CoreDataProperties.swift in Sources */,
 				A13EB26923A3FF420076F3D5 /* MovieDetailsView.swift in Sources */,
 				A1C9DDE524AB7E4200748DCD /* GenreModel.swift in Sources */,
 				A1EB399723ABEB1F008B627D /* MovieListView.swift in Sources */,
@@ -277,8 +259,6 @@
 				A1AF3F3A23CE429600FC772A /* ImageHelper.swift in Sources */,
 				A11C3E14238D63940099B67F /* MovieModel.swift in Sources */,
 				A11C3E22238D72300099B67F /* UIView+Additions.swift in Sources */,
-				A100C42424ACBC2A001411BF /* Genre+CoreDataClass.swift in Sources */,
-				A100C42124ACBA36001411BF /* GenresData.xcdatamodeld in Sources */,
 				A11C3E1D238D6DD70099B67F /* Protocols.swift in Sources */,
 				A11C3DF5238D36750099B67F /* AppDelegate.swift in Sources */,
 			);
@@ -470,19 +450,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A100C41F24ACBA36001411BF /* GenresData.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A100C42024ACBA36001411BF /* GenresData.xcdatamodel */,
-			);
-			currentVersion = A100C42024ACBA36001411BF /* GenresData.xcdatamodel */;
-			path = GenresData.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A11C3DE9238D36750099B67F /* Project object */;
 }
