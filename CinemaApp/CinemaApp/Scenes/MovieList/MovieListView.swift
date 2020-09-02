@@ -24,7 +24,7 @@ final class MovieListView: UIView {
   
   private enum ViewTrait {
     static let defaultPadding: CGFloat = 5
-    static let height: CGFloat = 210
+    static let height: CGFloat = UIScreen.main.bounds.width * 0.55
   }
   
   required init(delegate: MovieListDelegate?) {
