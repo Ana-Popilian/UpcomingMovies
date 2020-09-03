@@ -1,6 +1,6 @@
 # UpcomingMovies
 
-The UpcomingMovies is a sample application displaying the upcoming movies, using [themoviedb API](https://www.themoviedb.org). 
+The UpcomingMovies is a simple application displaying the upcoming movies, using [themoviedb API](https://www.themoviedb.org). 
 - Images are downloaded asynchronously in the background using GCD.
 - The content is fetched on demand while the user scrolls
 - A collection view was used to display the movie list
