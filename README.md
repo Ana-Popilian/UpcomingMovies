@@ -6,10 +6,10 @@ Cinema App is a sample displaying upcoming movies, using [themoviedb API](https:
 - A collection view was used to display the movie list
 - While downloading each image asynchronously an activity indicator is presented
 
-### Image represent the movie list screen
+### The images represent the movie list and the movie details screen
 
-<img width="300" alt="Photo1" src="https://user-images.githubusercontent.com/55087937/72453520-80f45980-37bf-11ea-8d9d-9a5ab149a57b.png">
+<p float="left">
+  <img src="https://user-images.githubusercontent.com/55087937/92138254-6e8e6500-ee0e-11ea-8629-26afc0266deb.png" width="350" height="650">
+  <img src="https://user-images.githubusercontent.com/55087937/92138434-a5647b00-ee0e-11ea-8706-8e4b64006d62.png" width="350" height="650"> 
+</p>
 
-### Image represent the movie details screen
-
-<img width="300" alt="Photo2" src="https://user-images.githubusercontent.com/55087937/72453543-8baeee80-37bf-11ea-95ba-09b6787ad858.png">
