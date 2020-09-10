@@ -93,6 +93,7 @@ private extension MovieDetailsView {
     imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
     imageView.clipsToBounds = true
+    imageView.backgroundColor = ColorHelper.customGray
   }
   
   func setupUserScoreLabel() {

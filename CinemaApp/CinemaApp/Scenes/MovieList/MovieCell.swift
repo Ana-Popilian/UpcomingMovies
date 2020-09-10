@@ -118,7 +118,7 @@ private extension MovieCell {
       imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
       imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: ViewTrait.imageMult),
       
-      nameContainerView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: ViewTrait.defaultSpacing),
+      nameContainerView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
       nameContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
       nameContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
       nameContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),

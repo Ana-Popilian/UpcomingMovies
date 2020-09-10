@@ -9,6 +9,5 @@
 import UIKit
 
 enum ColorHelper {
-  
   static let customGray: UIColor = UIColor(named: "customGray")!
 }
