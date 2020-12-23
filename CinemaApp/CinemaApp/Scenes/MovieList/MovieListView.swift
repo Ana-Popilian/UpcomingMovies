@@ -13,9 +13,16 @@ protocol MovieListDelegate where Self: UIViewController {
   func fetchNewData()
 }
 
-final class MovieListView: UIView {
+protocol MovieListViewProtocol where Self: UIView {
+    func insertNewItems(_ items: [MovieModel], at indexPaths: [IndexPath])
+    func updateGenres(_ genres: Genres)
+    func getDataCount() -> Int
+    var delegate: MovieListDelegate? { get set }
+}
+
+final class MovieListView: UIView, MovieListViewProtocol {
   
-  private weak var delegate: MovieListDelegate?
+ weak var delegate: MovieListDelegate?
   private var isFetchingData = false
   private var movieData = [MovieModel]()
   private var genreData: Genres!
@@ -27,8 +34,7 @@ final class MovieListView: UIView {
     static let height: CGFloat = UIScreen.main.bounds.width * 0.6
   }
   
-  required init(delegate: MovieListDelegate?) {
-    self.delegate = delegate
+  required init() {
     super.init(frame: .zero)
     backgroundColor = ColorHelper.customGray
     setupActivityIndicator()
