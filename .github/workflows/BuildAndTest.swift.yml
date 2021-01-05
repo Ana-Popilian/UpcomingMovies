@@ -7,19 +7,6 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-    name: Build
-    env:
-     SCHEME: "Actions"
-     DEVICE: "iPhone 8"
-     DERIVED_DATA_PATH: "DerivedData"
-    runs-on: macOS-latest
-    steps:
-     - name: Checkout project
-       uses: actions/checkout@v2
-     - name: Build application
-       run: |
-          set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
  
   unit_test:
    name: Unit test
@@ -28,7 +15,7 @@ jobs:
      DERIVED_DATA_PATH: "DerivedData"
      UNIT_TEST_TARGET: "ActionsTests"
    runs-on: macOS-latest
-   needs: build
+ 
    steps:
     - name: Checkout project
       uses: actions/checkout@v1
