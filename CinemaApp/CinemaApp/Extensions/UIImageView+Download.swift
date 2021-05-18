@@ -9,28 +9,28 @@
 import UIKit
 
 extension UIImageView {
-  
-  func downloadImage(fromUrl url: String, width: Int = 154, downloadFinishedHandler: (() -> Void)? = nil) {
-    
-    let networkManager = NetworkManager()
-    networkManager.fetchImage(imageUrl: url, width: width, completion: { data in
-      guard let data = data else {
-        DispatchQueue.main.async {
-          downloadFinishedHandler?()
-        }
-        return
-      }
+   
+   func downloadImage(fromUrl url: String, width: Int = 154, downloadFinishedHandler: (() -> Void)? = nil) {
       
-      let image = UIImage(data: data)
-      DispatchQueue.main.async {
-        self.image = image
-        downloadFinishedHandler?()
-      }
-    })
-  }
-  
-  func addPlaceholder() {
-    self.contentMode = .scaleAspectFit
-    self.image = ImageHelper.defaultPlaceholder
-  }
+      let networkManager = NetworkManager()
+      networkManager.fetchImage(imageUrl: url, width: width, completion: { data in
+         guard let data = data else {
+            DispatchQueue.main.async {
+               downloadFinishedHandler?()
+            }
+            return
+         }
+         
+         let image = UIImage(data: data)
+         DispatchQueue.main.async {
+            self.image = image
+            downloadFinishedHandler?()
+         }
+      })
+   }
+   
+   func addPlaceholder() {
+      self.contentMode = .scaleAspectFit
+      self.image = ImageHelper.defaultPlaceholder
+   }
 }

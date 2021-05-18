@@ -11,24 +11,24 @@ import UIKit
 protocol MovieDetailsViewControllerProtocol where Self: UIViewController { }
 
 protocol InjectorProtocol {
-    func makeNetworkManager() -> NetworkManagerProtocol
-    func makeMovieListViewController(movie: MovieModel, genres: Genres) -> MovieDetailsViewControllerProtocol
+   func makeNetworkManager() -> NetworkManagerProtocol
+   func makeMovieListViewController(movie: MovieModel, genres: Genres) -> MovieDetailsViewControllerProtocol
 }
 
 struct AppInjector: InjectorProtocol {
-    private init() {}
-    
-    static let shared = AppInjector()
+   private init() {}
+   
+   static let shared = AppInjector()
 }
 
 
 // MARK: - InjectorProtocolExtension
 extension InjectorProtocol {
-    func makeNetworkManager() -> NetworkManagerProtocol {
-        return NetworkManager()
-    }
-    
-    func makeMovieListViewController(movie: MovieModel, genres: Genres) -> MovieDetailsViewControllerProtocol {
-        return MovieDetailsViewController(movie: movie, genres: genres)
-    }
+   func makeNetworkManager() -> NetworkManagerProtocol {
+      return NetworkManager()
+   }
+   
+   func makeMovieListViewController(movie: MovieModel, genres: Genres) -> MovieDetailsViewControllerProtocol {
+      return MovieDetailsViewController(movie: movie, genres: genres)
+   }
 }
