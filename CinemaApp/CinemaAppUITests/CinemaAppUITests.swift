@@ -8,7 +8,7 @@
 
 import XCTest
 
-class CinemaAppUITests: XCTestCase {
+final class CinemaAppUITests: XCTestCase {
    
    var app: XCUIApplication!
    
@@ -19,11 +19,7 @@ class CinemaAppUITests: XCTestCase {
       app = XCUIApplication()
       app.launch()
    }
-   
-   override func tearDown() {
-      super.tearDown()
-   }
-   
+      
    func testCellElements() {
       wait(forElement: app.movieImageView, timeout: 3)
       wait(forElement: app.movieNameLabel, timeout: 3)

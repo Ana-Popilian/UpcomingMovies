@@ -11,6 +11,7 @@ import XCTest
 @testable import CinemaApp
 
 final class MovieListViewControllerTests: XCTestCase {
+   
     private var networkManager: NetworkManagerMock!
     private static let testMoviesModel = makeTestMovies()
     private static let testGenres = makeGenres()
@@ -35,7 +36,6 @@ final class MovieListViewControllerTests: XCTestCase {
         myVC.fetchNewData()
         XCTAssertNotNil(myVC.error, "Error should not be nil")
     }
-    
     
     func testFetchNewDataSuccess() {
         let mainView = MovieListMock()

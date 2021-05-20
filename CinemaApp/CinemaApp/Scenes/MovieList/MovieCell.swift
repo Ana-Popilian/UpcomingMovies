@@ -12,9 +12,9 @@ final class MovieCell: UICollectionViewCell, Identifiable {
    
    private var activityIndicator: UIActivityIndicatorView!
    private var containerView: UIView!
-   private var imageView: UIImageView!
+   private var movieImageView: UIImageView!
    private var nameContainerView: UIView!
-   private var nameLabel: UILabel!
+   private var movieNameLabel: UILabel!
    
    private enum ViewTrait {
       static let imageMult: CGFloat = 0.7
@@ -43,20 +43,20 @@ final class MovieCell: UICollectionViewCell, Identifiable {
    
    override func prepareForReuse() {
       super.prepareForReuse()
-      imageView.image = nil
+      movieImageView.image = nil
    }
    
    func bindCell(movie: MovieModel) {
       
       activityIndicator.startAnimating()
-      nameLabel.text = movie.title
+      movieNameLabel.text = movie.title
       
       guard let imageUrl = movie.portraitPath else {
          activityIndicator.stopAnimating()
-         imageView.addPlaceholder()
+         movieImageView.addPlaceholder()
          return
       }
-      imageView.downloadImage(fromUrl: imageUrl, downloadFinishedHandler: {
+      movieImageView.downloadImage(fromUrl: imageUrl, downloadFinishedHandler: {
          self.activityIndicator.stopAnimating()
       })
    }
@@ -80,9 +80,9 @@ private extension MovieCell {
    }
    
    func setupMovieImageView() {
-      imageView = UIImageView()
-      imageView.contentMode = .scaleAspectFill
-      imageView.accessibilityIdentifier = "image-view"
+      movieImageView = UIImageView()
+      movieImageView.contentMode = .scaleAspectFill
+      movieImageView.accessibilityIdentifier = "image-view"
    }
    
    func setupNameContainer() {
@@ -91,9 +91,9 @@ private extension MovieCell {
    
    func setupMovieNameLabel() {
       let font = UIFont.systemFont(ofSize: 12)
-      nameLabel = UILabel(font: font, textAlignment: .center, textColor: .black)
-      nameLabel.numberOfLines = 3
-      nameLabel.accessibilityIdentifier = "movie-label"
+      movieNameLabel = UILabel(font: font, textAlignment: .center, textColor: .black)
+      movieNameLabel.numberOfLines = 3
+      movieNameLabel.accessibilityIdentifier = "movie-label"
    }
 }
 
@@ -104,9 +104,9 @@ private extension MovieCell {
    func addSubviews() {
       addSubviewWC(containerView)
       containerView.addSubviewWC(activityIndicator)
-      containerView.addSubviewWC(imageView)
+      containerView.addSubviewWC(movieImageView)
       containerView.addSubviewWC(nameContainerView)
-      nameContainerView.addSubviewWC(nameLabel)
+      nameContainerView.addSubviewWC(movieNameLabel)
    }
    
    func setupConstraints() {
@@ -116,19 +116,19 @@ private extension MovieCell {
          containerView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ViewTrait.defaultSpacing),
          containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ViewTrait.defaultSpacing),
          
-         imageView.topAnchor.constraint(equalTo: containerView.topAnchor),
-         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-         imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-         imageView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: ViewTrait.imageMult),
+         movieImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
+         movieImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+         movieImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+         movieImageView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: ViewTrait.imageMult),
          
-         nameContainerView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+         nameContainerView.topAnchor.constraint(equalTo: movieImageView.bottomAnchor),
          nameContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
          nameContainerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
          nameContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
          
-         nameLabel.leadingAnchor.constraint(equalTo: nameContainerView.leadingAnchor, constant: ViewTrait.defaultSpacing),
-         nameLabel.centerYAnchor.constraint(equalTo: nameContainerView.centerYAnchor),
-         nameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultSpacing),
+         movieNameLabel.leadingAnchor.constraint(equalTo: nameContainerView.leadingAnchor, constant: ViewTrait.defaultSpacing),
+         movieNameLabel.centerYAnchor.constraint(equalTo: nameContainerView.centerYAnchor),
+         movieNameLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultSpacing),
          
          activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
          activityIndicator.centerYAnchor.constraint(equalTo: containerView.centerYAnchor)

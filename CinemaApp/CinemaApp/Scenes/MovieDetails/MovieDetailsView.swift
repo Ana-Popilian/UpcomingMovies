@@ -12,12 +12,12 @@ final class MovieDetailsView : UIView {
    
    private var scrollView: UIScrollView!
    private var containerView: UIView!
-   private var imageView: UIImageView!
+   private var movieDetailsImageView: UIImageView!
    private var userScoreLabel: UILabel!
    private var separatorView: UIView!
-   private var genreLabel: UILabel!
-   private var releaseDateLabel: UILabel!
-   private var overviewLabel: UILabel!
+   private var movieGenreLabel: UILabel!
+   private var movieReleaseDateLabel: UILabel!
+   private var movieOverviewLabel: UILabel!
    
    private enum ViewTrait {
       static let defaultVerticalSpacing: CGFloat = 15
@@ -57,8 +57,8 @@ final class MovieDetailsView : UIView {
       let date: Date? = dateFormatterGet.date(from: movie.releaseDate)
       let formattedDate = dateFormatter.string(from: date!)
       
-      releaseDateLabel.text = "Release Date: \(formattedDate)"
-      overviewLabel.text = ("Overview \n\n \(movie.overview)")
+      movieReleaseDateLabel.text = "Release Date: \(formattedDate)"
+      movieOverviewLabel.text = ("Overview \n\n \(movie.overview)")
       
       if movie.vote > 0 {
          userScoreLabel.text = ("User Score: \(movie.vote) / 10")
@@ -67,14 +67,14 @@ final class MovieDetailsView : UIView {
       }
       
       guard let imageUrl = movie.backdropPath else {
-         imageView.addPlaceholder()
+         movieDetailsImageView.addPlaceholder()
          return
       }
-      imageView.downloadImage(fromUrl: imageUrl, width: ViewTrait.imageWidth)
+      movieDetailsImageView.downloadImage(fromUrl: imageUrl, width: ViewTrait.imageWidth)
    }
    
    func setGenres( _ names: [String]) {
-      genreLabel.text = "Genre: \(names.joined(separator: ", "))"
+      movieGenreLabel.text = "Genre: \(names.joined(separator: ", "))"
    }
 }
 
@@ -90,11 +90,11 @@ private extension MovieDetailsView {
    }
    
    func setupMovieImageView() {
-      imageView = UIImageView()
-      imageView.contentMode = .scaleAspectFill
-      imageView.clipsToBounds = true
-      imageView.backgroundColor = ColorHelper.customGray
-      imageView.accessibilityIdentifier = "movie-image"
+      movieDetailsImageView = UIImageView()
+      movieDetailsImageView.contentMode = .scaleAspectFill
+      movieDetailsImageView.clipsToBounds = true
+      movieDetailsImageView.backgroundColor = ColorHelper.customGray
+      movieDetailsImageView.accessibilityIdentifier = "movie-image"
    }
    
    func setupUserScoreLabel() {
@@ -111,22 +111,22 @@ private extension MovieDetailsView {
    
    func setupMovieGenreLabel() {
       let font = UIFont.systemFont(ofSize: 14)
-      genreLabel = UILabel(text: "Genre:", font: font, textAlignment: .natural, textColor: .white)
-      genreLabel.numberOfLines = 0
-      genreLabel.accessibilityIdentifier = "movie-genre"
+      movieGenreLabel = UILabel(text: "Genre:", font: font, textAlignment: .natural, textColor: .white)
+      movieGenreLabel.numberOfLines = 0
+      movieGenreLabel.accessibilityIdentifier = "movie-genre"
    }
    
    func setupMovieReleaseDateLabel() {
       let font = UIFont.systemFont(ofSize: 14)
-      releaseDateLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
-      releaseDateLabel.accessibilityIdentifier = "movie-release"
+      movieReleaseDateLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
+      movieReleaseDateLabel.accessibilityIdentifier = "movie-release"
    }
    
    func setupMovieOverviewLabel() {
       let font = UIFont.systemFont(ofSize: 14)
-      overviewLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
-      overviewLabel.numberOfLines = 0
-      overviewLabel.accessibilityIdentifier = "movie-overview"
+      movieOverviewLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
+      movieOverviewLabel.numberOfLines = 0
+      movieOverviewLabel.accessibilityIdentifier = "movie-overview"
    }
 }
 
@@ -137,12 +137,12 @@ private extension MovieDetailsView {
    func addSubviews() {
       addSubviewWC(scrollView)
       scrollView.addSubviewWC(containerView)
-      containerView.addSubviewWC(imageView)
+      containerView.addSubviewWC(movieDetailsImageView)
       containerView.addSubviewWC(userScoreLabel)
       containerView.addSubviewWC(separatorView)
-      containerView.addSubviewWC(genreLabel)
-      containerView.addSubviewWC(releaseDateLabel)
-      containerView.addSubviewWC(overviewLabel)
+      containerView.addSubviewWC(movieGenreLabel)
+      containerView.addSubviewWC(movieReleaseDateLabel)
+      containerView.addSubviewWC(movieOverviewLabel)
    }
    
    func setupConstraints() {
@@ -159,11 +159,11 @@ private extension MovieDetailsView {
          containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
          containerView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
          
-         imageView.topAnchor.constraint(equalTo: containerView.topAnchor),
-         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-         imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+         movieDetailsImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
+         movieDetailsImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+         movieDetailsImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
          
-         userScoreLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+         userScoreLabel.topAnchor.constraint(equalTo: movieDetailsImageView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
          userScoreLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
          userScoreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
          
@@ -172,18 +172,18 @@ private extension MovieDetailsView {
          separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
          separatorView.heightAnchor.constraint(equalToConstant: ViewTrait.separatorHeight),
          
-         genreLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
-         genreLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
-         genreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
+         movieGenreLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+         movieGenreLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
+         movieGenreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
          
-         releaseDateLabel.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
-         releaseDateLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
-         releaseDateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
+         movieReleaseDateLabel.topAnchor.constraint(equalTo: movieGenreLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+         movieReleaseDateLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
+         movieReleaseDateLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
          
-         overviewLabel.topAnchor.constraint(equalTo: releaseDateLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
-         overviewLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
-         overviewLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
-         overviewLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -ViewTrait.defaultVerticalSpacing)
+         movieOverviewLabel.topAnchor.constraint(equalTo: movieReleaseDateLabel.bottomAnchor, constant: ViewTrait.defaultVerticalSpacing),
+         movieOverviewLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: ViewTrait.defaultHorizontalSpacing),
+         movieOverviewLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -ViewTrait.defaultHorizontalSpacing),
+         movieOverviewLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -ViewTrait.defaultVerticalSpacing)
       ])
    }
 }
