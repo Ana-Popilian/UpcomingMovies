@@ -34,6 +34,7 @@ final class MovieCell: UICollectionViewCell, Identifiable {
       setupActivityIndicator()
       addSubviews()
       setupConstraints()
+      accessibilityIdentifier = "collection-cell"
    }
    
    required init?(coder aDecoder: NSCoder) {
@@ -69,7 +70,6 @@ private extension MovieCell {
       activityIndicator = UIActivityIndicatorView(style: .large)
       activityIndicator.color = .black
       activityIndicator.hidesWhenStopped = true
-      activityIndicator.accessibilityIdentifier = "activity-indicator"
    }
    
    func setupContainerView() {

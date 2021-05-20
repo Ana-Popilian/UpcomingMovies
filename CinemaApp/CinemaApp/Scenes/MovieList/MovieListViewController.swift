@@ -50,10 +50,9 @@ final class MovieListViewController: UIViewController {
    }
    
    func setTitle() {
-      let font =  UIFont.systemFont(ofSize: 16)
+      let font = UIFont.systemFont(ofSize: 16)
       let label = UILabel(text: "Upcoming Movies", font: font, textAlignment: .center, textColor: .white)
       self.navigationItem.titleView = label
-      self.navigationItem.titleView?.accessibilityIdentifier = "title-label"
    }
 }
 

@@ -14,64 +14,44 @@ class CinemaAppUITests: XCTestCase {
    
    override func setUp() {
       super.setUp()
-      // Put setup code here. This method is called before the invocation of each test method in the class.
       
-      // In UI tests it is usually best to stop immediately when a failure occurs.
       continueAfterFailure = false
       app = XCUIApplication()
-      app.launchArguments = ["uitesting"]
       app.launch()
-      // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
    }
    
    override func tearDown() {
       super.tearDown()
    }
    
-   //   func testActivityIndicatorLoading() {
-   //      app = XCUIApplication()
-   //      app.launch()
-   //      XCTAssertTrue(app.activityIndicator.exists)
-   //   }
-   
-   func testLoadMovieList() {
-      app = XCUIApplication()
-      app.launch()
-      XCTAssertTrue(app.collectionView.exists)
+   func testCellElements() {
+      wait(forElement: app.movieImageView, timeout: 3)
+      wait(forElement: app.movieNameLabel, timeout: 3)
    }
    
-   func testLoadImage() {
-      app = XCUIApplication()
-      app.launch()
-      XCTAssertTrue(app.movieImageView.exists)
-   }
-   
-   func testShowMovieTitleLabel() {
-      app = XCUIApplication()
-      app.launch()
-      XCTAssertTrue(app.movieNameLabel.exists)
-   }
-   
-   func testDisplayScreenTitle() {
-      app = XCUIApplication()
-      app.launch()
-      XCTAssertTrue(app.screenTitleLabel.exists)
+   func testScrollView() {
+      let firstDisplayedCells = app.collectionView.cells.matching(identifier: "collection-cell").count
+      app.collectionView.swipeUp()
+      let allCells = firstDisplayedCells + app.collectionView.cells.matching(identifier: "collection-cell").count
+      
+      XCTAssertNotEqual(firstDisplayedCells, allCells)
    }
    
    func testTapOnCollectionViewCell() {
-      app = XCUIApplication()
-      app.launch()
-      app.collectionView.tap()
-      XCTAssertTrue(app.movieDetailsTitleLabel.exists)
+      app.collectionViewCell.firstMatch.tap()
+      wait(forElement: app.movieDetailsTitleLabel, timeout: 3)
+      wait(forElement: app.movieDetailsImageView, timeout: 3)
+      wait(forElement: app.movieScoreLabel, timeout: 3)
+      XCTAssertTrue(app.movieSeparatorView.exists)
+      wait(forElement: app.movieGenreLabel, timeout: 3)
+      wait(forElement: app.movieReleaseDateLabel, timeout: 3)
+      wait(forElement: app.movieOverviewLabel, timeout: 3)
    }
    
-   func testLaunchPerformance() throws {
-      if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-         // This measures how long it takes to launch your application.
-         measure(metrics: [XCTApplicationLaunchMetric()]) {
-            XCUIApplication().launch()
-         }
-      }
+   func testGoBack() {
+      app.collectionViewCell.firstMatch.tap()
+      app.backButton.tap()
+      wait(forElement: app.movieImageView, timeout: 3)
    }
 }
 
@@ -79,10 +59,17 @@ class CinemaAppUITests: XCTestCase {
 // MARK: - XCUIApplication extension
 private extension XCUIApplication {
    
-   var collectionView: XCUIElement { self.collectionViews["collection-view"] }
-   var activityIndicator: XCUIElement { self.activityIndicators["activity-indicator"] }
-   var movieImageView: XCUIElement { self.images["image-view"] }
-   var movieNameLabel: XCUIElement { self.staticTexts["movie-label"] }
+   var collectionView: XCUIElement { self.collectionViews["collection-view"]}
+   var collectionViewCell: XCUIElement { self.collectionViews.cells["collection-cell"] }
+   var movieImageView: XCUIElement { self.collectionViews.cells.images["image-view"] }
+   var movieNameLabel: XCUIElement { self.collectionViews.cells.staticTexts["movie-label"] }
    var screenTitleLabel: XCUIElement { self.staticTexts["title-label"] }
-   var movieDetailsTitleLabel: XCUIElement { self.staticTexts["movie-title"] }
+   var movieDetailsTitleLabel: XCUIElement { self.navigationBars.staticTexts["movie-title"] }
+   var movieDetailsImageView: XCUIElement { self.scrollViews.images["movie-image"] }
+   var movieScoreLabel: XCUIElement { self.scrollViews.staticTexts["movie-score"] }
+   var movieSeparatorView: XCUIElement { self.scrollViews.otherElements["separator-view"] }
+   var movieGenreLabel: XCUIElement { self.scrollViews.staticTexts["movie-genre"] }
+   var movieReleaseDateLabel: XCUIElement { self.scrollViews.staticTexts["movie-release"] }
+   var movieOverviewLabel: XCUIElement { self.scrollViews.staticTexts["movie-overview"] }
+   var backButton: XCUIElement { self.navigationBars.buttons["Back"] }
 }

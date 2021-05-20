@@ -37,7 +37,7 @@ final class MovieDetailsView : UIView {
       setupMovieGenreLabel()
       setupMovieReleaseDateLabel()
       setupUserScoreLabel()
-      setupMovieOverviewTextView()
+      setupMovieOverviewLabel()
       
       addSubviews()
       setupConstraints()
@@ -94,33 +94,39 @@ private extension MovieDetailsView {
       imageView.contentMode = .scaleAspectFill
       imageView.clipsToBounds = true
       imageView.backgroundColor = ColorHelper.customGray
+      imageView.accessibilityIdentifier = "movie-image"
    }
    
    func setupUserScoreLabel() {
       let font = UIFont.systemFont(ofSize: 15)
       userScoreLabel = UILabel(font: font, textAlignment: .center, textColor: .white)
+      userScoreLabel.accessibilityIdentifier = "movie-score"
    }
    
    func setupSeparatorView() {
       separatorView = UIView()
       separatorView.backgroundColor = .white
+      separatorView.accessibilityIdentifier = "separator-view"
    }
    
    func setupMovieGenreLabel() {
       let font = UIFont.systemFont(ofSize: 14)
       genreLabel = UILabel(text: "Genre:", font: font, textAlignment: .natural, textColor: .white)
       genreLabel.numberOfLines = 0
+      genreLabel.accessibilityIdentifier = "movie-genre"
    }
    
    func setupMovieReleaseDateLabel() {
       let font = UIFont.systemFont(ofSize: 14)
       releaseDateLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
+      releaseDateLabel.accessibilityIdentifier = "movie-release"
    }
    
-   func setupMovieOverviewTextView() {
+   func setupMovieOverviewLabel() {
       let font = UIFont.systemFont(ofSize: 14)
       overviewLabel = UILabel(font: font, textAlignment: .natural, textColor: .white)
       overviewLabel.numberOfLines = 0
+      overviewLabel.accessibilityIdentifier = "movie-overview"
    }
 }
 

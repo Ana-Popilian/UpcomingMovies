@@ -25,6 +25,7 @@
 		A1C9DDE524AB7E4200748DCD /* GenreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C9DDE424AB7E4200748DCD /* GenreModel.swift */; };
 		A1D4E4672397FE57002947A2 /* UIImageView+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D4E4662397FE57002947A2 /* UIImageView+Download.swift */; };
 		A1EB399723ABEB1F008B627D /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EB399623ABEB1F008B627D /* MovieListView.swift */; };
+		BE45C3832655114D00030D04 /* XCTestCaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE45C3822655114D00030D04 /* XCTestCaseExtension.swift */; };
 		BE61F1BD2653BC90000ECFE2 /* CinemaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61F1BC2653BC90000ECFE2 /* CinemaAppUITests.swift */; };
 		BEF41CF025935D0B00CEFCBC /* FactoryDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41CEF25935D0B00CEFCBC /* FactoryDesign.swift */; };
 		BEF41D07259377C100CEFCBC /* MovieListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF41D06259377C100CEFCBC /* MovieListViewControllerTests.swift */; };
@@ -68,6 +69,7 @@
 		A1C9DDE424AB7E4200748DCD /* GenreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModel.swift; sourceTree = "<group>"; };
 		A1D4E4662397FE57002947A2 /* UIImageView+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Download.swift"; sourceTree = "<group>"; };
 		A1EB399623ABEB1F008B627D /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
+		BE45C3822655114D00030D04 /* XCTestCaseExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtension.swift; sourceTree = "<group>"; };
 		BE61F1BA2653BC90000ECFE2 /* CinemaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CinemaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE61F1BC2653BC90000ECFE2 /* CinemaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaAppUITests.swift; sourceTree = "<group>"; };
 		BE61F1BE2653BC90000ECFE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				BE61F1BC2653BC90000ECFE2 /* CinemaAppUITests.swift */,
+				BE45C3822655114D00030D04 /* XCTestCaseExtension.swift */,
 				BE61F1BE2653BC90000ECFE2 /* Info.plist */,
 			);
 			path = CinemaAppUITests;
@@ -393,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE45C3832655114D00030D04 /* XCTestCaseExtension.swift in Sources */,
 				BE61F1BD2653BC90000ECFE2 /* CinemaAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

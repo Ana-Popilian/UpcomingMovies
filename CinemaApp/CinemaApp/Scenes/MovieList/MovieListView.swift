@@ -73,7 +73,6 @@ private extension MovieListView {
       activityIndicator.color = .black
       activityIndicator.hidesWhenStopped = true
       activityIndicator.startAnimating()
-//      activityIndicator.accessibilityIdentifier = "activity-indicator"
    }
    
    func setupCollectionView() {
@@ -114,7 +113,7 @@ extension MovieListView: UICollectionViewDelegate {
 }
 
 
-//MARK: - UICOllectionViewDataSource
+//MARK: - UICollectionViewDataSource
 extension MovieListView: UICollectionViewDataSource {
    
    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
