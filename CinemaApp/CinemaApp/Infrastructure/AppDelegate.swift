@@ -17,10 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     window = UIWindow(frame: UIScreen.main.bounds)
     
-    let nextViewController = MovieListViewController()
-    window?.rootViewController = nextViewController
+    let mainView = MovieListView()
+    let nextViewController = MovieListViewController(injector: AppInjector.shared, mainView: mainView)
+    mainView.delegate = nextViewController
+    let navigation = UINavigationController(rootViewController: nextViewController)
+    
+    window?.rootViewController = navigation
     window?.makeKeyAndVisible()
     return true
   }
 }
-

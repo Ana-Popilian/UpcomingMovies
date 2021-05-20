@@ -9,25 +9,28 @@
 import Foundation
 
 struct MovieModel: Codable {
-  let id: Int
-  let title: String
-  let popularity: Double
-  let image: String
-  let voteAverage: Double
-  let overview: String
-  let releaseDate: String
-  
-  private enum CodingKeys: String, CodingKey {
-    case id
-    case title
-    case popularity
-    case image = "poster_path"
-    case voteAverage = "vote_average"
-    case overview
-    case releaseDate = "release_date"
-  }
+   
+   let id: Int
+   let title: String
+   let vote: Double
+   let genre: [Int]
+   let portraitPath: String?
+   let backdropPath: String?
+   let overview: String
+   let releaseDate: String
+   
+   private enum CodingKeys: String, CodingKey {
+      case id
+      case title
+      case vote = "vote_average"
+      case backdropPath = "backdrop_path"
+      case genre = "genre_ids"
+      case portraitPath = "poster_path"
+      case overview
+      case releaseDate = "release_date"
+   }
 }
 
 struct Movies: Codable {
-  var results: [MovieModel]
+   var results: [MovieModel]
 }

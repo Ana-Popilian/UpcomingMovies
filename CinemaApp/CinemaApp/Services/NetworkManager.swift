@@ -6,38 +6,69 @@
 //  Copyright © 2019 Ana Popilian. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class NetworkManager {
+protocol NetworkManagerProtocol {
+    func getData<T: Decodable>(of type: T.Type,
+                               from url: URL,
+                               completion: @escaping (Result <T, Error>) -> Void)
+}
+
+enum DataError: Error {
+  case invalidResponse
+  case invalidData
+  case decodingError
+  case serverError
+}
+
+final class NetworkManager: NetworkManagerProtocol {
   
-  func getUpcomingMovies(completionHandler: @escaping (_ movies: [MovieModel]) -> Void) {
+  func getData<T: Decodable>(of type: T.Type,
+                             from url: URL,
+                             completion: @escaping (Result <T, Error>) -> Void) {
     
-    guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=6dac60d5bfa0f64225d7b8e75c53069e") else { return }
-    let request = URLSession.shared.dataTask(with: url) { (data, response, error) in
-      
-      do {
-        let decoder = JSONDecoder()
-        let response = try decoder.decode(Movies.self, from: data!)
+    URLSession.shared.dataTask(with: url) {(data, response, error) in
+      if let error = error {
+        completion (.failure(error))
         
-        completionHandler(response.results)
-        print(response)
-        
-      } catch let DecodingError.dataCorrupted(context) {
-        print(context)
-      } catch let DecodingError.keyNotFound(key, context) {
-        print("Key '\(key)' not found:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch let DecodingError.valueNotFound(value, context) {
-        print("Value '\(value)' not found:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch let DecodingError.typeMismatch(type, context)  {
-        print("Type '\(type)' mismatch:", context.debugDescription)
-        print("codingPath:", context.codingPath)
-      } catch {
-        print("error: ", error)
       }
-    }
+      
+      guard let response = response as? HTTPURLResponse else {
+        completion(.failure(DataError.invalidResponse))
+        return
+      }
+      
+      if 200 ... 299 ~= response.statusCode {
+        if let data = data {
+          do {
+            let decodedData: T = try JSONDecoder().decode(type, from: data);  completion(.success(decodedData))
+          }
+          catch {
+            completion(.failure(DataError.decodingError))
+          }
+        } else {
+          completion(.failure(DataError.invalidData))
+        }
+      } else {
+        completion(.failure(DataError.serverError))
+      }
+    } .resume()
+  }
+  
+  func fetchImage(imageUrl: String, width: Int, completion: @escaping (Data?) -> ()) {
     
-    request.resume()
+    let baseURl = "https://image.tmdb.org/t/p/w\(width)/"
+    let url = URL(string: baseURl + imageUrl)!
+    
+    let request = URLRequest(url: url)
+    let sessionConfig = URLSessionConfiguration.default
+    sessionConfig.timeoutIntervalForResource = 8
+    
+    let session = URLSession(configuration: sessionConfig)
+    
+    let task = session.dataTask(with: request, completionHandler: { data, response, error in
+      completion(data)
+    })
+    task.resume()
   }
 }
